@@ -1,0 +1,4 @@
+29-Oct-2017:
+ + Creacion de board en trello
+ + Priorizacion de User stories basandome en el orden de existencia de elementos y posterior aportacion de funcionalidad.
+ + creacion de documento de bitacora
