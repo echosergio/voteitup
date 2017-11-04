@@ -1,2 +1,100 @@
-module.exports = function(db) {
+module.exports = function (db) {
+    Promise.all([
+        db.User.create({
+            username: 'Carles',
+            bio: 'Aficionado a la política',
+            email: 'carles@mail.com',
+            image: null,
+            bgImage: null
+        }).then(function (user) {
+            db.Auth.create({
+                token: '1234',
+                userId: user.id
+            });
+            db.Poll.create({
+                text: '#Referendum de independecia #Cataluña',
+                UserId: user.id
+            }).then(function (poll) {
+                db.PollLocation.create({
+                    city: 'Barcelona',
+                    country: 'España',
+                    pollId: poll.id
+                });
+                db.Choice.bulkCreate([{
+                    text: 'Sí',
+                    PollId: poll.id
+                }, {
+                    text: 'No',
+                    PollId: poll.id
+                }]);
+            });
+        }),
+        db.User.create({
+            username: 'Alfonso',
+            bio: null,
+            email: 'alfonso@mail.com',
+            image: null,
+            bgImage: null
+        }).then(function (user) {
+            db.Auth.create({
+                token: '1234',
+                userId: user.id
+            });
+            db.Poll.create({
+                text: '#HuelgaDocentes',
+                UserId: user.id
+            }).then(function (poll) {
+                db.PollLocation.create({
+                    city: 'Madrid',
+                    country: 'España',
+                    pollId: poll.id
+                });
+                db.Choice.bulkCreate([{
+                    text: 'Sí',
+                    PollId: poll.id
+                }, {
+                    text: 'No',
+                    PollId: poll.id
+                }]);
+            });
+            db.Poll.create({
+                text: '#Elecciones 21 Diciembre',
+                UserId: user.id
+            }).then(function (poll) {
+                db.PollLocation.create({
+                    city: 'Barcelona',
+                    country: 'España',
+                    pollId: poll.id
+                });
+                db.Choice.bulkCreate([{
+                    text: 'CiU',
+                    PollId: poll.id
+                }, {
+                    text: 'Ciutadans',
+                    PollId: poll.id
+                }, {
+                    text: 'CUP',
+                    PollId: poll.id
+                }, {
+                    text: 'DemCat',
+                    PollId: poll.id
+                }, {
+                    text: 'PSC',
+                    PollId: poll.id
+                }, {
+                    text: 'PP Català',
+                    PollId: poll.id
+                }]);
+            });
+        })
+    ]).then(() => {
+        db.Vote.create({
+            date: '2017-10-01 10:00:00',
+        }).then(function (vote) {
+            vote.update({
+                ChoiceId: 2,
+                userId: 2
+            });
+        });
+    });
 };
