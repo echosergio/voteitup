@@ -1,18 +1,18 @@
 "use strict";
 
 module.exports = function (sequelize, DataTypes) {
-    var Poll = sequelize.define('Poll', {
-        text: DataTypes.STRING
+    var Auth = sequelize.define('Auth', {
+        token: DataTypes.STRING
     }, {
         timestamps: false,
         classMethods: {
             associate: function (models) {
-                Poll.hasMany(models.Choice, {
-                    as: 'choices'
+                Auth.belongsTo(models.User, {
+                    as: 'user'
                 });
             }
         }
     });
 
-    return Poll;
+    return Auth;
 };

@@ -1,18 +1,18 @@
 "use strict";
 
 module.exports = function (sequelize, DataTypes) {
-    var Poll = sequelize.define('Poll', {
-        text: DataTypes.STRING
+    var Vote = sequelize.define('Vote', {
+        date: DataTypes.DATE
     }, {
         timestamps: false,
         classMethods: {
             associate: function (models) {
-                Poll.hasMany(models.Choice, {
-                    as: 'choices'
+                Vote.belongsTo(models.User, {
+                    as: 'user'
                 });
             }
         }
     });
 
-    return Poll;
+    return Vote;
 };
