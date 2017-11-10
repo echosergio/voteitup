@@ -8,7 +8,7 @@ Dedicado exclusivamente a votaciones siendo una plataforma de referencia a la ho
 
 ### Get auth token  
 
-`POST /api/v1/auth/token`  
+POST `/api/v1/auth/token`  
 
 Request
 ```json
@@ -26,8 +26,8 @@ Response
 
 ### Users
 
-`GET /api/v1/users`  
-`GET /api/v1/users/:userId` 
+GET `/api/v1/users`  
+GET `/api/v1/users/:userId` 
 
 Response
 ```json
@@ -51,7 +51,7 @@ Response
 ]
 ```
 
-`POST /api/v1/users`  
+POST `/api/v1/users`  
 
 Request
 ```json
@@ -64,30 +64,15 @@ Request
 ```
 Response
 ```json
-[
-    {
-        "id": 1,
-        "username": "Carles",
-        "bio": "Aficionado a la política",
-        "email": "carles@mail.com",
-        "image": null,
-        "bgImage": null
-    },
-    {
-        "id": 2,
-        "username": "Alfonso",
-        "bio": null,
-        "email": "alfonso@mail.com",
-        "image": null,
-        "bgImage": null
-    }
-]
+{
+    "status": "success"
+}
 ```
 
 ### Polls
 
-`GET /api/v1/polls`  
-`GET /api/v1/polls/:userId` 
+GET `/api/v1/polls`  
+GET `/api/v1/polls/:userId` 
 
 Response
 ```json
@@ -133,8 +118,8 @@ Response
 ]
 ```
 
-`GET /api/v1/users/:userId/polls`  
-`GET /api/v1/users/:userId/polls/:pollId` 
+GET `/api/v1/users/:userId/polls`  
+GET `/api/v1/users/:userId/polls/:pollId` 
 
 Response
 ```json
@@ -161,7 +146,7 @@ Response
 ]
 ```
 
-`POST /api/v1/users/:userId/polls`  
+POST `/api/v1/users/:userId/polls`  
 
 Request
 ```json

@@ -1,6 +1,10 @@
 # Changelog
 Bitácora del proyecto
 
+## 0.0.4 - 10-11-2017
+### Añadido
+- Funcionalidad básica de la API
+
 ## 0.0.3 - 04-11-2017
 ### Añadido
 - API REST de VoteItUp, inicio del proyecto
