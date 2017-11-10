@@ -7,9 +7,8 @@ module.exports = function (sequelize, DataTypes) {
         timestamps: false,
         classMethods: {
             associate: function (models) {
-                Poll.hasMany(models.Choice, {
-                    as: 'choices'
-                });
+                Poll.hasMany(models.Choice, {});
+                Poll.hasOne(models.Area, {});
             }
         }
     });

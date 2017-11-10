@@ -7,9 +7,7 @@ module.exports = function (sequelize, DataTypes) {
         timestamps: false,
         classMethods: {
             associate: function (models) {
-                Vote.belongsTo(models.User, {
-                    as: 'user'
-                });
+                Vote.belongsTo(models.User, {});
             }
         }
     });

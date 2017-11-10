@@ -7,9 +7,7 @@ module.exports = function (sequelize, DataTypes) {
         timestamps: false,
         classMethods: {
             associate: function (models) {
-                Choice.hasMany(models.Vote, {
-                    as: 'votes'
-                });
+                Choice.hasMany(models.Vote, {});
             }
         }
     });

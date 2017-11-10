@@ -6,11 +6,7 @@ module.exports = function (sequelize, DataTypes) {
     }, {
         timestamps: false,
         classMethods: {
-            associate: function (models) {
-                Auth.belongsTo(models.User, {
-                    as: 'user'
-                });
-            }
+            associate: function (models) {}
         }
     });
 

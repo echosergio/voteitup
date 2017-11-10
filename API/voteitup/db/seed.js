@@ -8,17 +8,17 @@ module.exports = function (db) {
             bgImage: null
         }).then(function (user) {
             db.Auth.create({
-                token: '1234',
-                userId: user.id
+                token: '81dc9bdb52d04dc20036dbd8313ed055', //1234
+                UserId: user.id
             });
             db.Poll.create({
                 text: '#Referendum de independecia #Cataluña',
                 UserId: user.id
             }).then(function (poll) {
-                db.PollLocation.create({
+                db.Area.create({
                     city: 'Barcelona',
                     country: 'España',
-                    pollId: poll.id
+                    PollId: poll.id
                 });
                 db.Choice.bulkCreate([{
                     text: 'Sí',
@@ -37,17 +37,17 @@ module.exports = function (db) {
             bgImage: null
         }).then(function (user) {
             db.Auth.create({
-                token: '1234',
-                userId: user.id
+                token: '81dc9bdb52d04dc20036dbd8313ed055',
+                UserId: user.id
             });
             db.Poll.create({
                 text: '#HuelgaDocentes',
                 UserId: user.id
             }).then(function (poll) {
-                db.PollLocation.create({
+                db.Area.create({
                     city: 'Madrid',
                     country: 'España',
-                    pollId: poll.id
+                    PollId: poll.id
                 });
                 db.Choice.bulkCreate([{
                     text: 'Sí',
@@ -61,10 +61,10 @@ module.exports = function (db) {
                 text: '#Elecciones 21 Diciembre',
                 UserId: user.id
             }).then(function (poll) {
-                db.PollLocation.create({
+                db.Area.create({
                     city: 'Barcelona',
                     country: 'España',
-                    pollId: poll.id
+                    PollId: poll.id
                 });
                 db.Choice.bulkCreate([{
                     text: 'CiU',
@@ -88,6 +88,14 @@ module.exports = function (db) {
             });
         })
     ]).then(() => {
+        db.Vote.create({
+            date: '2017-10-01 10:00:00',
+        }).then(function (vote) {
+            vote.update({
+                ChoiceId: 2,
+                userId: 1
+            });
+        });
         db.Vote.create({
             date: '2017-10-01 10:00:00',
         }).then(function (vote) {

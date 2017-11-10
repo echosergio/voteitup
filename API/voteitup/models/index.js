@@ -11,7 +11,8 @@ const ASSOCIATE = 'associate';
 
 sequelize = new Sequelize('voteitup', null, null, {
     dialect: 'sqlite',
-    storage: './db/core.sqlite'
+    storage: './db/core.sqlite',
+    logging: console.log
 });
 
 fs

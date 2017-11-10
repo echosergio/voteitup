@@ -11,12 +11,9 @@ module.exports = function (sequelize, DataTypes) {
         timestamps: false,
         classMethods: {
             associate: function (models) {
-                User.hasMany(models.Activity, {
-                    as: 'activities'
-                });
-                User.hasMany(models.Poll, {
-                    as: 'polls'
-                });
+                User.hasMany(models.Activity, {});
+                User.hasMany(models.Poll, {});
+                User.hasOne(models.Auth, {});
             }
         }
     });
