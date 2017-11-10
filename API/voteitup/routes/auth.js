@@ -2,7 +2,6 @@ var express = require('express');
 var jwt = require("jwt-simple");
 var crypto = require('crypto');
 var auth = require("../passport-auth.js")();
-var users = require("../users.js");
 var db = require('../models');
 var cfg = require("../config.js");
 var router = express.Router();

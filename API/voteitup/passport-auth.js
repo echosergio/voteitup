@@ -1,7 +1,6 @@
 var passport = require("passport");
 var JwtStrategy = require('passport-jwt').Strategy,
     ExtractJwt = require('passport-jwt').ExtractJwt;
-var users = require("./users.js");
 var cfg = require("./config.js");
 
 var opts = {
