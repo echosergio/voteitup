@@ -1,6 +1,13 @@
 # Changelog
 Bitácora del proyecto
 
+## 0.0.5 - 11-11-2017
+### Añadido
+- Funcionalidad para obtener las estadísticas de una encuesta
+- Funcionalidad para ver la actividad de usuarios
+- Solución de bugs
+- Despliegue de la API en Heroku
+
 ## 0.0.4 - 10-11-2017
 ### Añadido
 - Funcionalidad básica de la API
