@@ -3,8 +3,10 @@ Bitácora del proyecto
 
 ## 0.0.5 - 11-11-2017
 ### Añadido
-- Funcionalidad para obtener las estadísticas de una encuesta
-- Funcionalidad para ver la actividad de usuarios
+- Obtener las estadísticas de una encuesta
+- Ver la actividad de usuarios
+- Filtrar encuesta por palabra clave
+- Obtener encuestas trending
 - Solución de bugs
 - Despliegue de la API en Heroku
 

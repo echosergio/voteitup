@@ -75,6 +75,7 @@ Response
 ## Polls
 
 GET `/api/v1/polls`  
+GET `/api/v1/polls?keyword=foo`  
 GET `/api/v1/polls/:pollId`  
 GET `/api/v1/polls/:userId` 
 
@@ -123,7 +124,30 @@ Response
     }
 ]
 ```
- 
+
+GET `/api/v1/polls/trending` 
+
+Response
+```json
+[
+    {
+        "id": 1,
+        "text": "#Referendum de independecia #Cataluña",
+        "votes": 2
+    },
+    {
+        "id": 2,
+        "text": "#HuelgaDocentes",
+        "votes": 1
+    },
+    {
+        "id": 3,
+        "text": "#Elecciones 21 Diciembre",
+        "votes": 0
+    }
+]
+```
+
 GET `/api/v1/:pollId/activity`  
 GET `/api/v1/:pollId/activity?daysback=3` 
 
