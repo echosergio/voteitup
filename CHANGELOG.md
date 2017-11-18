@@ -1,6 +1,13 @@
 # Changelog
 Bitácora del proyecto
 
+## 0.0.6 - 18-11-2017
+### Añadido
+- Obtener número de encuestas creadas por cada usuario
+- Creación y publicación de la documentación de la API
+### Modificado
+- API movida a un repositorio diferente para adaptar despliegue en Heroku
+
 ## 0.0.5 - 11-11-2017
 ### Añadido
 - Obtener las estadísticas de una encuesta
