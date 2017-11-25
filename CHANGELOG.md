@@ -1,6 +1,11 @@
 # Changelog
 Bitácora del proyecto
 
+## 0.0.7 - 24-11-2017
+### Añadido
+- Login screen y autenticación de usuario
+- API endpoint para borrar encuestas creadas por el usuario
+
 ## 0.0.6 - 18-11-2017
 ### Añadido
 - Obtener número de encuestas creadas por cada usuario
