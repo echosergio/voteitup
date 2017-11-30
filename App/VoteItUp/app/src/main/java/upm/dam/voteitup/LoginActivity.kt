@@ -123,7 +123,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun enterApp(): Unit {
-        val intent = Intent(this, PollActivity::class.java)
+        val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }

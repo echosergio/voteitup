@@ -17,4 +17,5 @@
 
     <!-- Strings related to the API -->
     <string name="api_url">https://polar-oasis-43680.herokuapp.com</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>
