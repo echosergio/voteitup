@@ -1,6 +1,10 @@
 # Changelog
 Bitácora del proyecto
 
+## 0.0.8 - 30-11-2017
+### Añadido
+- Pantalla de resultados y actividad de una encuesta
+
 ## 0.0.7 - 24-11-2017
 ### Añadido
 - Login screen y autenticación de usuario

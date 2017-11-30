@@ -1,9 +1,7 @@
 package upm.dam.voteitup.charts
 
-import android.content.Context
 import android.graphics.Color
 import android.graphics.Typeface
-import android.support.v4.content.res.ResourcesCompat
 import com.github.mikephil.charting.charts.HorizontalBarChart
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.components.XAxis
@@ -12,25 +10,24 @@ import com.github.mikephil.charting.data.BarDataSet
 import com.github.mikephil.charting.data.BarEntry
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.utils.ColorTemplate
-import upm.dam.voteitup.R
+import upm.dam.voteitup.entities.Choice
 
 
-class PollBarChart constructor(val barChart: HorizontalBarChart, val choiceMap: HashMap<String, Int>) {
+class PollBarChart constructor(private val choices: List<Choice>) {
 
-    private val entries = mutableListOf<BarEntry>()
-    private val entriesMap = mutableMapOf<Float, String>()
+    private val barEntries = mutableListOf<BarEntry>()
+    private val barEntryMap = mutableMapOf<Float, Choice>()
+    private val totalVotes = choices.sumBy { it.votes }
 
     var typeFace: Typeface? = null
-
-    private val totalVotes = choiceMap.values.sum().toFloat()
 
     private val formatter = object : IAxisValueFormatter {
         val decimalDigits: Int
             get() = 0
 
         override fun getFormattedValue(value: Float, axis: AxisBase): String {
-            val votesPercentage = (choiceMap[entriesMap[value]]!! * 100) / totalVotes
-            val choiceText = entriesMap[value]
+            val votesPercentage = (barEntryMap[value]!!.votes * 100) / totalVotes.toFloat()
+            val choiceText = barEntryMap[value]!!.text
 
             return choiceText + " (" + "%.1f".format(votesPercentage) + " %)"
         }
@@ -39,62 +36,51 @@ class PollBarChart constructor(val barChart: HorizontalBarChart, val choiceMap: 
     init {
         var xValue: Float = 0f;
 
-        for (choiceText: String in choiceMap.keys) {
-            entriesMap.put(xValue, choiceText)
-            entries.add(BarEntry(xValue, choiceMap.get(choiceText)!!.toFloat()))
+        choices.forEach{ choice ->
+            barEntries.add(BarEntry(xValue, choice.votes.toFloat()))
+            barEntryMap.put(xValue, choice)
             xValue += 1f
         }
     }
 
-    fun g(): HorizontalBarChart {
-        val xAxis = barChart.getXAxis()
-        xAxis.setGranularity(1f) // minimum axis-step (interval) is 1
-        xAxis.setValueFormatter(formatter)
+    fun getChart(barChart: HorizontalBarChart): HorizontalBarChart {
+        barChart.xAxis.granularity = 1f
+        barChart.xAxis.valueFormatter = formatter
+        barChart.xAxis.position = XAxis.XAxisPosition.TOP_INSIDE
+        barChart.xAxis.xOffset = 12f
+        barChart.xAxis.setDrawAxisLine(false)
+        barChart.xAxis.setDrawGridLines(false)
+        barChart.xAxis.textSize = 18f
+        barChart.xAxis.textColor = Color.BLACK
+        if (typeFace != null) barChart.xAxis.typeface = typeFace
 
-        xAxis.setPosition(XAxis.XAxisPosition.TOP_INSIDE);
-        xAxis.setXOffset(12f);
+        barChart.axisLeft.axisMaximum = totalVotes.toFloat()
+        barChart.axisLeft.axisMinimum = 0f
+        barChart.axisLeft.isEnabled = false
+        barChart.axisLeft.setDrawGridLines(false)
 
+        barChart.axisRight.isEnabled = false
+        barChart.axisRight.setDrawGridLines(false)
 
-        xAxis.typeface = typeFace
-        xAxis.textSize = 18f
-        xAxis.textColor = Color.BLACK
-
-        val set = BarDataSet(entries, "BarDataSet")
-        set.setColors(ColorTemplate.COLORFUL_COLORS.toList());
-        set.valueTextSize = 18f
-        set.setDrawValues(false);
-
-        barChart.setTouchEnabled(false)
-
-        // Set the maximum value that can be taken by the bars
-        barChart.getAxisLeft().setAxisMaximum(totalVotes);
-        barChart.getAxisLeft().setAxisMinimum(0f);
-
-        // Display scores inside the bars
+        barChart.description.isEnabled = false;
+        barChart.legend.isEnabled = false;
+        barChart.layoutParams.height = 200*choices.count()
 
         barChart.setDrawValueAboveBar(false);
         barChart.setDrawBarShadow(false);
         barChart.setDrawGridBackground(false)
         barChart.setDrawBorders(false)
 
+        barChart.animateY(1000)
+        barChart.setTouchEnabled(false)
 
-        barChart.getAxisLeft().setEnabled(false);
+        val barDataSet = BarDataSet(barEntries, null)
+        barDataSet.colors = ColorTemplate.COLORFUL_COLORS.toList();
+        barDataSet.valueTextSize = 18f
+        barDataSet.setDrawValues(false);
 
-        barChart.getAxisRight().setEnabled(false);
-        barChart.getDescription().setEnabled(false);
-        barChart.getLegend().setEnabled(false);
-
-
-        barChart.getXAxis().setDrawAxisLine(false);
-        barChart.getXAxis().setDrawGridLines(false);
-        barChart.getAxisLeft().setDrawGridLines(false);
-        barChart.getAxisRight().setDrawGridLines(false);
-        barChart.animateY(1000);
-
-        barChart.getLayoutParams().height=200*choiceMap.keys.count();
-
-        val data = BarData(set)
-        barChart.setData(data)
+        val barData = BarData(barDataSet)
+        barChart.setData(barData)
 
         return barChart
     }

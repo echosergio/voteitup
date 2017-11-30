@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="upm.dam.voteitup.PollActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/pollBackgroundImage"
+            android:layout_width="match_parent"
+            android:layout_height="350sp"
+            android:background="@drawable/login_background"
+            android:scaleType="centerCrop"
+            android:src="@drawable/gradient_shape" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="240sp"
+                android:layout_margin="20sp"
+                android:orientation="vertical"
+                android:weightSum="1">
+
+                <TextView
+                    android:id="@+id/pollText"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.84"
+                    android:fontFamily="@font/arvo_bold"
+                    android:gravity="center_vertical"
+                    android:text="#Referendum de independecia #Cataluña"
+                    android:textColor="@color/white"
+                    android:textSize="32sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="0.16"
+                    android:orientation="horizontal"
+                    android:weightSum="1">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.30"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <ImageButton
+                            android:id="@+id/voteButton"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.40"
+                            android:background="@null"
+                            android:scaleType="centerInside"
+                            app:srcCompat="@drawable/vote_icon" />
+
+                        <TextView
+                            android:id="@+id/voteText"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.60"
+                            android:layout_marginLeft="5sp"
+                            android:fontFamily="@font/roboto_light"
+                            android:gravity="left|center_vertical"
+                            android:text="Votar"
+                            android:textColor="@color/white"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/votesText"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="0.70"
+                        android:fontFamily="@font/roboto_light"
+                        android:gravity="right|center_vertical"
+                        android:text="13815 votos"
+                        android:textColor="@color/white"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <com.github.mikephil.charting.charts.HorizontalBarChart
+                android:id="@+id/pollHorizontalBarChart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </com.github.mikephil.charting.charts.HorizontalBarChart>
+
+            <TextView
+                android:id="@+id/recentActivityText"
+                android:layout_width="match_parent"
+                android:layout_height="20sp"
+                android:layout_marginVertical="10sp"
+                android:layout_marginLeft="15sp"
+                android:fontFamily="@font/roboto_light"
+                android:gravity="bottom"
+                android:text="Actividad reciente"
+                android:textAllCaps="true"
+                android:textColor="@android:color/background_dark"
+                android:textSize="18sp" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/pollActivityLineChart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</ScrollView>
