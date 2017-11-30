@@ -10,13 +10,24 @@ import android.R.attr.entries
 import android.graphics.Color
 import android.graphics.Typeface
 import android.support.v4.content.res.ResourcesCompat
+import com.github.mikephil.charting.charts.LineChart
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter
 import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.components.AxisBase
 import com.github.mikephil.charting.formatter.IAxisValueFormatter
 import com.github.mikephil.charting.components.Legend
-
-
+import com.github.mikephil.charting.components.YAxis
+import com.github.mikephil.charting.data.Entry
+import com.github.mikephil.charting.utils.ColorTemplate
+import upm.dam.voteitup.charts.PollBarChart
+import java.util.stream.Collectors.toList
+import com.github.mikephil.charting.components.YAxis.AxisDependency
+import com.github.mikephil.charting.data.LineDataSet
+import com.github.mikephil.charting.data.LineData
+import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import java.text.DateFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,75 +37,93 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val horizontalBarChart = findViewById<HorizontalBarChart>(R.id.horizontalBarChart)
-        // Look-up table
 
-// Set the value formatter
+        val choicesMap = hashMapOf("Sí" to 224242, "No" to 423443)
+//replace with choices objects
+        val c = PollBarChart(horizontalBarChart, choicesMap)
+        var typeFace: Typeface? = ResourcesCompat.getFont(this, R.font.arvo)
+        c.typeFace = typeFace
+        val horizontalBarChart2 = c.g()
+
+        horizontalBarChart2.invalidate() // refresh
 
 
+        val lineChart = findViewById<LineChart>(R.id.lineChart)
 
-        val quarters = arrayOf("Q1", "Q2")
+        val entries1 = mutableListOf(
+                Entry(0f, 100000f),
+                Entry(1f, 140000f),
+                Entry(2f, 170000f),
+                Entry(3f, 150000f),
+                Entry(4f, 180000f),
+                Entry(5f, 190000f),
+                Entry(6f, 130000f))
+
+        val setComp1 = LineDataSet(entries1, "Company 1")
+        setComp1.axisDependency = AxisDependency.LEFT
+
+
+        val dataset = LineDataSet(entries1, null)
+        dataset.setDrawFilled(true);
+        dataset.setCircleRadius(5f)
+        dataset.setLineWidth(3f)
+
+        val colorf = Color.rgb(101, 200, 237)
+        dataset.setColor(colorf);
+        dataset.setCircleColor(colorf)
+        dataset.fillColor = colorf
+
+        dataset.setHighLightColor(Color.BLUE)
+
 
         val formatter = object : IAxisValueFormatter {
-
-            // we don't draw numbers, so no decimal digits needed
             val decimalDigits: Int
                 get() = 0
 
             override fun getFormattedValue(value: Float, axis: AxisBase): String {
-                return quarters[value.toInt()]
+                val sdf = SimpleDateFormat("MM/dd/yyyy")
+                val netDate = Date((value * 1000).toLong())
+                return sdf.format(netDate)
+
             }
         }
 
-        val xAxis = horizontalBarChart.getXAxis()
-        xAxis.setGranularity(1f) // minimum axis-step (interval) is 1
-        xAxis.setValueFormatter(formatter)
+        lineChart.setTouchEnabled(false)
 
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        lineChart.getXAxis().setValueFormatter(formatter)
+        lineChart.getXAxis().isEnabled = false
 
-        var typeFace: Typeface? = ResourcesCompat.getFont(this, R.font.pacifico)
-        xAxis.typeface = typeFace
-        xAxis.textSize = 18f
-        xAxis.textColor = Color.rgb(39, 64, 104)
-
-        val entries = listOf(
-                BarEntry(0f, 4f),
-        BarEntry(1f, 65f)
-        )
+        lineChart.getLayoutParams().height=600
 
 
+        lineChart.setDrawGridBackground(false);
+        lineChart.getAxisLeft().setEnabled(false);
+
+        lineChart.getAxisRight().setEnabled(false);
+        lineChart.getDescription().setEnabled(false);
+        lineChart.getLegend().setEnabled(false);
+
+        lineChart.getXAxis().setPosition(XAxis.XAxisPosition.BOTTOM)
+        lineChart.getXAxis().setLabelCount(entries1.count(),true)
+
+        lineChart.getXAxis().setDrawAxisLine(false);
+        lineChart.getXAxis().setDrawGridLines(false);
+        lineChart.getAxisLeft().setDrawGridLines(false);
+        lineChart.getAxisRight().setDrawGridLines(false);
 
 
-        val set = BarDataSet(entries, "BarDataSet")
-        set.setColor(Color.rgb(39, 64, 104));
-
-        // Set the maximum value that can be taken by the bars
-        horizontalBarChart.getAxisLeft().setAxisMaximum(100f);
-        horizontalBarChart.getAxisLeft().setAxisMinimum(0f);
-
-        // Display scores inside the bars
-        horizontalBarChart.setDrawValueAboveBar(true);
-        horizontalBarChart.setDrawBarShadow(false);
-        horizontalBarChart.setDrawGridBackground(false)
-        horizontalBarChart.setDrawBorders(false)
+        lineChart.animateY(1000);
 
 
-        horizontalBarChart.getAxisLeft().setEnabled(false);
-        horizontalBarChart.getAxisRight().setEnabled(false);
-        horizontalBarChart.getDescription().setEnabled(false);
-        horizontalBarChart.getLegend().setEnabled(false);
+        val data = LineData(dataset)
+
+        lineChart.setData(data)
+        lineChart.invalidate() // refresh
 
 
-        horizontalBarChart.getXAxis().setDrawAxisLine(false);
-        horizontalBarChart.getXAxis().setDrawGridLines(false);
-        horizontalBarChart.getAxisLeft().setDrawGridLines(false);
-        horizontalBarChart.getAxisRight().setDrawGridLines(false);
 
-        val data = BarData(set)
-        data.setValueTypeface(typeFace)
 
-        horizontalBarChart.setData(data)
-        horizontalBarChart.setFitBars(true) // make the x-axis fit exactly all bars
-        horizontalBarChart.invalidate() // refresh
+
 
     }
 }
