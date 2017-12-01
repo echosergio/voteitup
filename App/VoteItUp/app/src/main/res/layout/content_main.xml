@@ -14,10 +14,17 @@
         android:orientation="vertical">
 
         <SearchView
+            android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
         </SearchView>
+
+        <ImageView
+            android:id="@+id/imageCoverView"
+            android:layout_width="match_parent"
+            android:layout_height="210dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/home_cover" />
 
         <ListView
             android:id="@+id/pollsListView"
