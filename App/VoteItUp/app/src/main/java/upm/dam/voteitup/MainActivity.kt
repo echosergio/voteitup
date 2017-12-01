@@ -11,7 +11,12 @@ import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
 import android.widget.ListView
 import upm.dam.voteitup.entities.Poll
 import android.widget.AdapterView
+import com.github.kittinunf.fuel.Fuel
+import com.github.kittinunf.fuel.android.extension.responseJson
+import com.github.kittinunf.result.Result
+import com.google.gson.Gson
 import upm.dam.voteitup.adapters.PollsListAdapter
+import java.io.FileReader
 
 class MainActivity : AppCompatActivity() {
 
@@ -34,35 +39,43 @@ class MainActivity : AppCompatActivity() {
             when (item.itemId) {
                 R.id.action_home -> Toast.makeText(this, "Home", Toast.LENGTH_SHORT).show()
                 R.id.action_search -> Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show()
-                R.id.action_trending -> Toast.makeText(this, "Trending", Toast.LENGTH_SHORT).show()
                 R.id.action_profile -> Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
+                R.id.action_settings -> Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
             }
 
             true
         }
 
-        val tom = Poll(text = "#Referendum de independecia #Cataluña", creationDate = "125167 votos")
-        val jerry = Poll(text = "#HuelgaDocentes", creationDate = "32427 votos")
-        val donald = Poll(text = "#Elecciones 21D", creationDate = "65926 votos")
+        var polls = mutableListOf<Poll>()
 
-        val users = listOf<Poll>(tom, jerry, donald)
+        Fuel
+                .get("https://polar-oasis-43680.herokuapp.com/api/v1/polls")
+                .header("Authorization" to "bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.kHZQ03yhLOPC1c7f6CdItQbT2ljvMQLbucdJVkqwEKs")
+                .responseJson { _, _, result ->
+                    when (result) {
+                        is Result.Failure -> {
+                            Toast.makeText(this@MainActivity, result.toString(), Toast.LENGTH_LONG).show()
+                        }
+                        is Result.Success -> {
+                            (0 until result.value.array().length()).mapTo(polls) { Gson().fromJson(result.value.array()[it].toString(), Poll::class.java) }
 
+                            val listView = findViewById<ListView>(R.id.pollsListView)
+                            listView.adapter = PollsListAdapter(this, polls)
 
-        val listView = findViewById<ListView>(R.id.pollsListView)
-        listView.adapter = PollsListAdapter(this, users)
+                            // When the user clicks on the ListItem
+                            listView.onItemClickListener = object : AdapterView.OnItemClickListener {
 
-        // When the user clicks on the ListItem
-        listView.onItemClickListener = object : AdapterView.OnItemClickListener {
+                                override fun onItemClick(a: AdapterView<*>, v: View, position: Int, id: Long) {
+                                    val o = listView.getItemAtPosition(position)
+                                    val poll = o as Poll
+                                    //Toast.makeText(this@MainActivity, "Selected :" + " " + country, Toast.LENGTH_LONG).show()
 
-            override fun onItemClick(a: AdapterView<*>, v: View, position: Int, id: Long) {
-                val o = listView.getItemAtPosition(position)
-                val country = o as Poll
-                //Toast.makeText(this@MainActivity, "Selected :" + " " + country, Toast.LENGTH_LONG).show()
-
-                val intent = Intent(baseContext, PollActivity::class.java)
-                startActivity(intent)
-            }
-        }
+                                    val intent = PollActivity.newIntent(baseContext, poll)
+                                    startActivity(intent)
+                                }
+                            }
+                        }
+                    }
+                }
     }
-
 }

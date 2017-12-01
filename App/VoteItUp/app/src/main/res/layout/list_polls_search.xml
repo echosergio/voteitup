@@ -3,7 +3,7 @@
     android:layout_width="match_parent" android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="64dp"
+        android:layout_width="4dp"
         android:layout_height="64dp"
         android:id="@+id/imageView_flag"
         android:layout_alignParentTop="true"

@@ -8,12 +8,12 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/pollBackgroundImage"
             android:layout_width="match_parent"
-            android:layout_height="350sp"
+            android:layout_height="310sp"
             android:background="@drawable/login_background"
             android:scaleType="centerCrop"
             android:src="@drawable/gradient_shape" />
@@ -25,7 +25,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="240sp"
+                android:layout_height="220sp"
                 android:layout_margin="20sp"
                 android:orientation="vertical"
                 android:weightSum="1">
@@ -37,7 +37,6 @@
                     android:layout_weight="0.84"
                     android:fontFamily="@font/arvo_bold"
                     android:gravity="center_vertical"
-                    android:text="#Referendum de independecia #Cataluña"
                     android:textColor="@color/white"
                     android:textSize="32sp" />
 
@@ -71,8 +70,8 @@
                             android:layout_weight="0.60"
                             android:layout_marginLeft="5sp"
                             android:fontFamily="@font/roboto_light"
-                            android:gravity="left|center_vertical"
-                            android:text="Votar"
+                            android:gravity="start|center_vertical"
+                            android:text="@string/vote"
                             android:textColor="@color/white"
                             android:textSize="20sp"
                             android:textStyle="bold" />
@@ -84,8 +83,8 @@
                         android:layout_height="match_parent"
                         android:layout_weight="0.70"
                         android:fontFamily="@font/roboto_light"
-                        android:gravity="right|center_vertical"
-                        android:text="13815 votos"
+                        android:gravity="end|center_vertical"
+                        android:text="0 votos"
                         android:textColor="@color/white"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -96,7 +95,7 @@
             <com.github.mikephil.charting.charts.HorizontalBarChart
                 android:id="@+id/pollHorizontalBarChart"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="150sp">
 
             </com.github.mikephil.charting.charts.HorizontalBarChart>
 
@@ -105,10 +104,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="20sp"
                 android:layout_marginVertical="10sp"
-                android:layout_marginLeft="15sp"
+                android:layout_marginStart="15sp"
                 android:fontFamily="@font/roboto_light"
                 android:gravity="bottom"
-                android:text="Actividad reciente"
+                android:text="@string/recent_activity"
                 android:textAllCaps="true"
                 android:textColor="@android:color/background_dark"
                 android:textSize="18sp" />
@@ -116,7 +115,7 @@
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/pollActivityLineChart"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="150sp" />
 
         </LinearLayout>
 

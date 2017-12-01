@@ -25,40 +25,39 @@ class PollActivityLineChart constructor(activities: List<Activity>) {
         lineChart.xAxis.isEnabled = false
         lineChart.xAxis.setDrawAxisLine(false)
         lineChart.xAxis.setDrawGridLines(false)
-        lineChart.xAxis.setPosition(XAxis.XAxisPosition.BOTTOM)
+        lineChart.xAxis.position = XAxis.XAxisPosition.BOTTOM
         //lineChart.xAxis.setLabelCount(activities.count(),true)
 
-        lineChart.axisLeft.setEnabled(false)
+        lineChart.axisLeft.isEnabled = false
         lineChart.axisLeft.setDrawGridLines(false)
 
-        lineChart.axisRight.setEnabled(false)
+        lineChart.axisRight.isEnabled = false
         lineChart.axisRight.setDrawGridLines(false)
 
-        lineChart.description.setEnabled(false)
-        lineChart.legend.setEnabled(false)
-        lineChart.layoutParams.height = 600
+        lineChart.description.isEnabled = false
+        lineChart.legend.isEnabled = false
+        lineChart.layoutParams.height = 500
 
         lineChart.setDrawGridBackground(false);
 
         lineChart.animateY(1000);
         lineChart.setTouchEnabled(false)
 
-
         val lineDataSet = LineDataSet(entries, null)
         lineDataSet.setDrawFilled(true);
-        lineDataSet.setCircleRadius(5f)
-        lineDataSet.setLineWidth(3f)
+        lineDataSet.circleRadius = 5f
+        lineDataSet.lineWidth = 3f
 
         val colorf = Color.rgb(101, 200, 237)
-        lineDataSet.setColor(colorf);
+        lineDataSet.color = colorf;
         lineDataSet.setCircleColor(colorf)
         lineDataSet.fillColor = colorf
 
-        lineDataSet.setHighLightColor(Color.BLUE)
+        lineDataSet.highLightColor = Color.BLUE
 
         val lineData = LineData(lineDataSet)
 
-        lineChart.setData(lineData)
+        lineChart.data = lineData
 
         return lineChart
     }
