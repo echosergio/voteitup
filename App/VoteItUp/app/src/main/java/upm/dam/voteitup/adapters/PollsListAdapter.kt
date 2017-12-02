@@ -2,13 +2,11 @@ package upm.dam.voteitup.adapters
 
 import android.content.Context
 import android.support.v4.content.res.ResourcesCompat
-import android.util.Log
 import android.widget.TextView
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.BaseAdapter
-import android.widget.ImageView
 import upm.dam.voteitup.R
 import upm.dam.voteitup.entities.Poll
 

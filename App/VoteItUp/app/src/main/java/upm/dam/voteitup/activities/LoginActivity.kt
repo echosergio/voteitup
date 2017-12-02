@@ -1,4 +1,4 @@
-package upm.dam.voteitup
+package upm.dam.voteitup.activities
 
 import android.content.Context
 import android.content.Intent
@@ -8,16 +8,15 @@ import android.text.TextUtils
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import com.github.kittinunf.fuel.*
-import com.github.kittinunf.result.Result
 import kotlinx.android.synthetic.main.activity_login.*
 import android.widget.ProgressBar
 import android.content.SharedPreferences
-import com.github.kittinunf.fuel.android.extension.responseJson
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.async
+import kotlinx.coroutines.experimental.launch
+import upm.dam.voteitup.ApiClient
+import upm.dam.voteitup.R
 
-/**
- * A login screen that offers login via email/password.
- */
 class LoginActivity : AppCompatActivity() {
 
     private var TOKEN: String = ""
@@ -29,12 +28,17 @@ class LoginActivity : AppCompatActivity() {
         sharedPreferences = this.getSharedPreferences(getString(R.string.shared_preferences), Context.MODE_PRIVATE)
         TOKEN = getString(R.string.shared_preferences_token)
 
+        ApiClient.URL = resources.getString(R.string.api_url)
+
         // DEV: To reset user token
         // val editor = sharedPreferences!!.edit()
         // editor.remove(TOKEN)
         // editor.apply()
 
-        if (sharedPreferences!!.getString(TOKEN, null) != null) {
+        val token = sharedPreferences!!.getString(TOKEN, null)
+
+        if (token != null) {
+            ApiClient.JWT = token
             enterApp()
         }
 
@@ -52,8 +56,8 @@ class LoginActivity : AppCompatActivity() {
 
     private fun attemptLogin() {
 
-        var mProgressBar = findViewById<ProgressBar>(R.id.login_progress);
-        var mForgotPass = findViewById<TextView>(R.id.forgotPass);
+        val mProgressBar = findViewById<ProgressBar>(R.id.login_progress);
+        val mForgotPass = findViewById<TextView>(R.id.forgotPass);
 
         // Reset errors.
         email.error = null
@@ -90,27 +94,26 @@ class LoginActivity : AppCompatActivity() {
             mForgotPass.visibility = View.GONE
             mProgressBar.visibility = View.VISIBLE
 
-            Fuel
-                    .post(getString(R.string.api_url) + "/api/v1/auth/token")
-                    .header("Content-Type" to "application/json")
-                    .body("{ \"email\" : \"$emailStr\", \"password\" : \"$passwordStr\"}")
-                    .responseJson { _, _, result ->
-                        when (result) {
-                            is Result.Failure -> {
-                                mProgressBar.visibility = View.GONE
-                                mForgotPass.visibility = View.VISIBLE
-                            }
-                            is Result.Success -> {
-                                mProgressBar.visibility = View.GONE
+            val getAuthTokenAsync = async { ApiClient.getAuthToken(emailStr, passwordStr) }
 
-                                val editor = sharedPreferences!!.edit()
-                                editor.putString(TOKEN, result.get().obj()["token"].toString())
-                                editor.apply()
+            launch(UI) {
+                val token = getAuthTokenAsync.await()
 
-                                enterApp()
-                            }
-                        }
-                    }
+                if (token == null){
+                    mProgressBar.visibility = View.GONE
+                    mForgotPass.visibility = View.VISIBLE
+                } else {
+                    mProgressBar.visibility = View.GONE
+
+                    ApiClient.JWT = token
+
+                    val editor = sharedPreferences!!.edit()
+                    editor.putString(TOKEN, token)
+                    editor.apply()
+
+                    enterApp()
+                }
+            }
         }
     }
 

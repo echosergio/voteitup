@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">VoteItUp</string>
     <string name="title_activity_login">Login</string>
+    <string name="title_activity_main">MainActivity</string>
 
     <!-- Strings related to sharedPreferences -->
     <string name="shared_preferences">upm.dam.voteitup.sharedpreferences</string>
@@ -17,7 +18,12 @@
 
     <!-- Strings related to the API -->
     <string name="api_url">https://polar-oasis-43680.herokuapp.com</string>
-    <string name="title_activity_main">MainActivity</string>
+
+    <!-- Strings related to the app strings -->
     <string name="vote">Votar</string>
     <string name="recent_activity">Actividad reciente</string>
+    <string name="home">Inicio</string>
+    <string name="near">Cerca</string>
+    <string name="profile">Perfil</string>
+    <string name="settings">Ajustes</string>
 </resources>
