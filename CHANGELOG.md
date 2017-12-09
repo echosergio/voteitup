@@ -1,6 +1,10 @@
 # Changelog
 Bitácora del proyecto
 
+## 1.0.0 - 2-12-2017
+### Añadido
+- Creado Api de cliente y añadidas corrutinas de kotlin
+
 ## 0.0.8 - 30-11-2017
 ### Añadido
 - Pantalla de resultados y actividad de una encuesta
