@@ -36,8 +36,8 @@ class PollsListAdapter(private val context: Context, private val listData: List<
             convertView = layoutInflater.inflate(R.layout.list_polls_search, null)
 
             holder = ViewHolder()
-            holder.pollTextView = convertView!!.findViewById<TextView>(R.id.textView_countryName)
-            holder.pollVotesView = convertView!!.findViewById(R.id.textView_population)
+            holder.pollTextView = convertView!!.findViewById<TextView>(R.id.textView_pollName)
+            holder.pollVotesView = convertView!!.findViewById(R.id.textView_votes)
 
             convertView!!.setTag(holder)
         } else {
