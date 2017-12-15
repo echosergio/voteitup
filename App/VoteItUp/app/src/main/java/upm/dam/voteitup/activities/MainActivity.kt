@@ -4,11 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
 import upm.dam.voteitup.entities.Poll
 import upm.dam.voteitup.adapters.PollsListAdapter
 import android.widget.*
+import kotlinx.android.synthetic.main.activity_create_poll.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
@@ -68,5 +70,16 @@ class MainActivity : AppCompatActivity() {
 
             override fun onQueryTextChange(newText: String): Boolean = false
         })
+        fab.setOnClickListener { createPoll() }
+    }
+
+    fun createPoll() {
+        val intent = Intent(this, CreatePollActivity::class.java)
+        startActivity(intent)
+    }
+
+    fun createPoll(view: View) {
+        val intent = Intent(this, CreatePollActivity::class.java)
+        startActivity(intent)
     }
 }
