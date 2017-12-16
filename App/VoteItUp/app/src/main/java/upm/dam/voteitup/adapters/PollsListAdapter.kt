@@ -37,11 +37,11 @@ class PollsListAdapter(private val context: Context, private val listData: List<
 
             holder = ViewHolder()
             holder.pollTextView = convertView!!.findViewById<TextView>(R.id.textView_pollName)
-            holder.pollVotesView = convertView!!.findViewById(R.id.textView_votes)
+            holder.pollVotesView = convertView.findViewById(R.id.textView_votes)
 
-            convertView!!.setTag(holder)
+            convertView.setTag(holder)
         } else {
-            holder = convertView!!.getTag() as ViewHolder
+            holder = convertView.getTag() as ViewHolder
         }
 
         val poll = this.listData[position]
