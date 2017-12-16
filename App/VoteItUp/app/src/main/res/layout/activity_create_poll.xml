@@ -1,164 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/Theme.AppCompat.NoActionBar"
-
+    android:gravity="top|start"
+    android:orientation="vertical"
+    android:background="@drawable/login_background"
+    android:theme="@style/Theme.Design.NoActionBar"
     tools:context="upm.dam.voteitup.activities.CreatePollActivity">
-    <LinearLayout
+
+    <RelativeLayout
+        android:id="@+id/relative_items"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_gravity="top|left"
+        android:layout_weight="5"
+        android:gravity="top">
+
 
         <RelativeLayout
-            android:id="@+id/relative_items"
+            android:id="@+id/form"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top|left"
-            android:layout_marginBottom="100dp">
+            android:orientation="horizontal">
 
-
-            <RelativeLayout
-                android:id="@+id/form"
+            <TextView
+                android:id="@+id/tv_NewPoll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/pollBackgroundImage"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
-                    android:background="@drawable/login_background"
-                    android:elevation="0dp"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/gradient_shape" />
-
-                <TextView
-                    android:id="@+id/tv_NewPoll"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_alignStart="@+id/txtBox_desc"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="58dp"
-                    android:text="Crear Encuesta"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="58dp"
+                android:fontFamily="@font/pacifico"
+                android:text="Crear Encuesta"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textSize="30dp" />
 
 
-                <EditText
-                    android:id="@+id/txtBox_desc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/tv_NewPoll"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="34dp"
-                    android:ems="10"
-                    android:hint="Add the title and hastag"
-                    android:inputType="textMultiLine" />
-
-                <TextView
-                    android:id="@+id/tv_AnwserLbl"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignStart="@+id/txtBox_desc"
-                    android:layout_below="@+id/tv_NewPoll"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="95dp"
-                    android:text="Respuestas"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Title" />
-
-                <android.support.design.widget.FloatingActionButton
-                    android:id="@+id/plusAnswer"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@+id/txtBox_desc"
-                    android:layout_marginTop="8dp"
-                    android:layout_toEndOf="@+id/tv_NewPoll"
-                    app:backgroundTint="@color/colorPrimary"
-                    app:elevation="24dp"
-                    app:layout_anchor="@+id/include"
-                    app:layout_anchorGravity="right|center"
-                    app:srcCompat="@drawable/plus_icon" />
-
-                <ListView
-                    android:id="@+id/list_Opt"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_alignParentEnd="false"
-                    android:layout_below="@+id/txtBox_desc"
-                    android:layout_marginBottom="150dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:layout_marginTop="80dp" />
-
-            </RelativeLayout>
-
-            <RelativeLayout
+            <EditText
+                android:id="@+id/txtBox_desc"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_alignBottom="@+id/form">
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_NewPoll"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginTop="34dp"
+                android:ems="10"
+                android:hint="Add the title and hastag"
 
-                <Button
-                    android:id="@+id/addLoc"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/list_Opt"
-                    android:layout_centerHorizontal="true"
-                    android:layout_marginLeft="60dp"
-                    android:layout_marginRight="60dp"
-                    android:text="Add Location" />
+                android:inputType="textMultiLine" />
 
-                <Button
-                    android:id="@+id/newPoll"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="bottom|end"
-                    android:layout_marginBottom="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
-                    android:text="Save Poll" />
+            <TextView
+                android:id="@+id/tv_AnwserLbl"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@+id/txtBox_desc"
+                android:layout_below="@+id/txtBox_desc"
+                android:layout_marginTop="44dp"
+                android:text="Respuestas"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
-            </RelativeLayout>
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/plusAnswer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tv_AnwserLbl"
+                android:layout_alignStart="@+id/tv_NewPoll"
+                android:layout_marginStart="26dp"
+                app:backgroundTint="@color/colorPrimary"
+                app:elevation="24dp"
+                app:layout_anchorGravity="right|center"
+                app:srcCompat="@drawable/plus_icon" />
 
+            <ListView
+                android:id="@+id/ListView01"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/addLoc"
+                android:layout_below="@+id/tv_AnwserLbl"
+                android:drawSelectorOnTop="false">
 
-        </RelativeLayout>
+            </ListView>
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|start"
-            android:elevation="10dp">
+            <Button
+                android:id="@+id/addLoc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/newPoll"
+                android:layout_centerHorizontal="true"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:elevation="23dp"
+                android:text="Add Location" />
+
+            <Button
+                android:id="@+id/newPoll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@id/bottom_navigation"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="bottom|end"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@color/colorPrimary"
+                android:text="Save Poll" />
 
             <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
                 android:id="@+id/bottom_navigation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
                 android:layout_gravity="bottom|end"
-
                 android:background="@color/colorPrimary"
                 android:visibility="visible"
-                app:elevation="24dp"
                 app:itemIconTint="@color/white"
                 app:itemTextColor="@color/white"
-                app:menu="@menu/bottom_navigation_main"
-                tools:elevation="24dp"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="532dp" />
+                app:menu="@menu/bottom_navigation_main" />
 
         </RelativeLayout>
 
+    </RelativeLayout>
 
-    </LinearLayout>
 
-</ScrollView>
+
+
+
+
+</LinearLayout>
