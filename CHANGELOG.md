@@ -1,6 +1,11 @@
 # Changelog
 Bitácora del proyecto
 
+## 1.0.1 - 16-12-2017
+### Añadido
+- Add fragments to main activity layouts
+- Update Kotlin version to 1.2.10
+
 ## 1.0.0 - 2-12-2017
 ### Añadido
 - Creado Api de cliente y añadidas corrutinas de kotlin

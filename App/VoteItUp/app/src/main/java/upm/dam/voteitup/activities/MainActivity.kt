@@ -2,20 +2,10 @@ package upm.dam.voteitup.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.view.View
+import android.widget.*
 import kotlinx.android.synthetic.main.activity_main.*
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
-import android.widget.*
-
-import kotlinx.android.synthetic.main.activity_main.view.*
-
-import kotlinx.android.synthetic.main.activity_create_poll.*
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
-import upm.dam.voteitup.ApiClient
 import upm.dam.voteitup.R
 import upm.dam.voteitup.fragments.PollsFragment
 
