@@ -89,7 +89,8 @@
                     android:layout_marginRight="20dp"
                     android:background="@drawable/border_ui"
                     android:drawSelectorOnTop="false"
-                    android:theme="@style/Theme.Design.NoActionBar"></ListView>
+                    android:theme="@style/Theme.Design.NoActionBar"/>
+
                 <!-- android:layout_above="@+id/addLoc" -->
 
                 <!--
@@ -119,13 +120,8 @@
              android:background="@color/colorPrimary"
              android:text="@string/save_poll_text" />
              -->
-
-
             </RelativeLayout>
-
-
         </LinearLayout>
-
     </ScrollView>
 
     <android.support.design.widget.FloatingActionButton
