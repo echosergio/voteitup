@@ -35,4 +35,6 @@
     <string name="respuestas">Respuestas</string>
     <string name="add_location_text">Add Location</string>
     <string name="save_poll_text">Save Poll</string>
+    <string name="error_desc_empty">Necestiamos alguna description</string>
+    <string name="error_two_answers_needed">Se necesitan al menos dos posibles respuestas</string>
 </resources>

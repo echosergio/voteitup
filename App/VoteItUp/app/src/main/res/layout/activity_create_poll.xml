@@ -9,7 +9,6 @@
         android:gravity="top|start"
         android:orientation="vertical"
         android:theme="@style/Theme.Design.NoActionBar"
-        android:windowSoftInputMode="adjustNothing"
         tools:context="upm.dam.voteitup.activities.CreatePollActivity">
 
 
@@ -45,6 +44,7 @@
 
                 <EditText
                     android:id="@+id/txtBox_desc"
+                    android:focusableInTouchMode="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_NewPoll"
@@ -55,7 +55,9 @@
                     android:ems="10"
                     android:hint="@string/add_the_title_and_hastag"
 
-                    android:inputType="none|text" />
+                    android:inputType="none|text">
+                    <requestFocus />
+                </EditText>
 
                 <TextView
                     android:id="@+id/tv_AnwserLbl"
@@ -87,8 +89,9 @@
                     android:layout_margin="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:background="@drawable/border_ui"
                     android:drawSelectorOnTop="false"
+                    android:descendantFocusability="afterDescendants"
+                    android:focusable="false"
                     android:theme="@style/Theme.Design.NoActionBar"/>
 
                 <!-- android:layout_above="@+id/addLoc" -->

@@ -1,5 +1,6 @@
 package upm.dam.voteitup
 
+import android.support.v4.util.Pools
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.result.Result
@@ -85,4 +86,26 @@ object ApiClient {
             }
         }
     }
+
+    fun submitPool(poll: Poll): Any {
+        ///api/v1/users/<ID>/polls
+
+        val poll_json = Gson().toJson(poll)
+        val (_, _, result) = Fuel
+                .post("$URL/api/v1/users/$poll.UserId/polls")
+                .header("Content-Type" to "application/json")
+                .header("Authorization" to "bearer $JWT")
+                .body(poll_json)
+                .responseJson()
+
+        return when (result) {
+            is Result.Failure -> {
+                false
+            }
+            is Result.Success -> {
+                true
+            }
+        }
+    }
+
 }

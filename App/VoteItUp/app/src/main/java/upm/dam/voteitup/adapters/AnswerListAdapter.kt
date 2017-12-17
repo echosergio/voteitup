@@ -9,7 +9,9 @@ import android.widget.BaseAdapter
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_create_poll.*
 import upm.dam.voteitup.R
+import upm.dam.voteitup.R.id.answerList
 import upm.dam.voteitup.entities.Poll
 
 class AnswerListAdapter(private val context: Context, private val listData: MutableList<EditText>) : BaseAdapter() {
@@ -47,14 +49,15 @@ class AnswerListAdapter(private val context: Context, private val listData: Muta
         val answer = this.listData[position].text
         holder.editAnswerView!!.setText(answer)
 
+
         holder.editAnswerView!!.onFocusChangeListener = View.OnFocusChangeListener{ view, hasFocus ->
             if (!hasFocus) {
                 if (!holder.editAnswerView!!.isInEditMode) {
                     var text = holder.editAnswerView!!.text
-                    this.listData[position].
-                            setText(text.toString(),TextView.BufferType.EDITABLE)
+                    this.listData[position].setText(text.toString(),TextView.BufferType.EDITABLE)
                 }
             }
+
         }
 
         return convertView

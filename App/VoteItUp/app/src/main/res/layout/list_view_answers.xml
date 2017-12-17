@@ -3,10 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@style/Theme.Design.NoActionBar"
+    android:focusable="false"
     android:orientation="horizontal" >
 
     <EditText
         android:id="@+id/editText1"
+        android:focusable="false"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/Theme.Design.NoActionBar"
