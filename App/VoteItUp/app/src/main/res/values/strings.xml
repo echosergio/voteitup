@@ -26,4 +26,10 @@
     <string name="near">Cerca</string>
     <string name="profile">Perfil</string>
     <string name="settings">Ajustes</string>
+    <string name="Example_Answer">Example Answer</string>
+    <string name="crear_encuesta">Crear Encuesta</string>
+    <string name="add_the_title_and_hastag">Add the title and hastag</string>
+    <string name="respuestas">Respuestas</string>
+    <string name="add_location_text">Add Location</string>
+    <string name="save_poll_text">Save Poll</string>
 </resources>
