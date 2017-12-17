@@ -7,21 +7,23 @@
     android:layout_height="match_parent"
     tools:context="upm.dam.voteitup.activities.MainActivity">
 
-    <include
-        android:id="@+id/include"
-        layout="@layout/content_main" />
+    <FrameLayout
+        android:id="@+id/mainFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="60dp"
+        android:layout_marginBottom="80dp"
+        android:layout_marginEnd="20dp"
+        android:layout_gravity="bottom"
         app:backgroundTint="@color/fab"
-        app:elevation="0dp"
-        app:layout_anchor="@+id/include"
-        app:layout_anchorGravity="right|bottom"
-        app:srcCompat="@drawable/plus_icon"
-        />
+        app:elevation="8dp"
+        app:layout_anchor="@+id/bottom_navigation"
+        app:layout_anchorGravity="right|top"
+        app:srcCompat="@drawable/plus_icon" />
 
     <com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
         android:id="@+id/bottom_navigation"
