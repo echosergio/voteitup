@@ -17,6 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="top|left"
+        android:layout_marginBottom="80dp"
         android:fillViewport="true">
 
         <LinearLayout
@@ -44,7 +45,6 @@
 
                 <EditText
                     android:id="@+id/txtBox_desc"
-                    android:focusableInTouchMode="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/tv_NewPoll"
@@ -53,9 +53,11 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="34dp"
                     android:ems="10"
+                    android:focusableInTouchMode="true"
                     android:hint="@string/add_the_title_and_hastag"
 
                     android:inputType="none|text">
+
                     <requestFocus />
                 </EditText>
 
@@ -73,8 +75,9 @@
                     android:id="@+id/plusAnswer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignEnd="@+id/txtBox_desc"
-                    android:layout_alignTop="@+id/tv_AnwserLbl"
+                    android:layout_alignBottom="@+id/tv_AnwserLbl"
+                    android:layout_toRightOf="@id/tv_AnwserLbl"
+                    android:layout_marginBottom="0dp"
                     app:backgroundTint="@android:color/transparent"
                     app:elevation="24dp"
                     app:layout_anchorGravity="right|center"
@@ -89,10 +92,10 @@
                     android:layout_margin="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"
-                    android:drawSelectorOnTop="false"
                     android:descendantFocusability="afterDescendants"
+                    android:drawSelectorOnTop="false"
                     android:focusable="false"
-                    android:theme="@style/Theme.Design.NoActionBar"/>
+                    android:theme="@style/Theme.Design.NoActionBar" />
 
                 <!-- android:layout_above="@+id/addLoc" -->
 

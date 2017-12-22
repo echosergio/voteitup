@@ -37,4 +37,5 @@
     <string name="save_poll_text">Save Poll</string>
     <string name="error_desc_empty">Necestiamos alguna description</string>
     <string name="error_two_answers_needed">Se necesitan al menos dos posibles respuestas</string>
+    <string name="action_register">Join!</string>
 </resources>

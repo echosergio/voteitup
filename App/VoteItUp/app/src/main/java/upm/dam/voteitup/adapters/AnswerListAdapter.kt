@@ -20,7 +20,6 @@ class AnswerListAdapter(private val context: Context, private val listData: Muta
     init {
         layoutInflater = LayoutInflater.from(context)
     }
-
     override fun getCount(): Int {
         return listData.size
     }
@@ -59,11 +58,12 @@ class AnswerListAdapter(private val context: Context, private val listData: Muta
             }
 
         }
-
         return convertView
     }
 
     internal class ViewHolder {
         var editAnswerView: EditText? = null
     }
+
+
 }

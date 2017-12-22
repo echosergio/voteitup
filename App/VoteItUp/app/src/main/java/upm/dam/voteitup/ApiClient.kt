@@ -44,7 +44,8 @@ object ApiClient {
                 null
             }
             is Result.Success -> {
-                Gson().fromJson(result.value.obj().toString(), Poll::class.java)
+                if (result.value.content.isNullOrBlank()) { null }
+                else Gson().fromJson(result.value.obj().toString(), Poll::class.java)
             }
         }
     }

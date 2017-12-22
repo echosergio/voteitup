@@ -1,5 +1,6 @@
 package upm.dam.voteitup.activities
 
+import android.content.Intent
 import android.inputmethodservice.Keyboard
 import android.inputmethodservice.KeyboardView
 import android.support.v7.app.AppCompatActivity
@@ -29,13 +30,10 @@ class CreatePollActivity : AppCompatActivity() {
         setContentView(R.layout.activity_create_poll)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-        var edittxt = EditText(this)
-        edittxt.hint = Example_Answer.toString()
-        list = mutableListOf( edittxt )
+
+        list = mutableListOf<EditText>()
         answersAdapter = AnswerListAdapter(baseContext,
                 listData = list)
-
-
         val listView = findViewById<ListView>(R.id.answerList)
         listView.adapter = answersAdapter
 
@@ -69,10 +67,15 @@ class CreatePollActivity : AppCompatActivity() {
 
         var poll = Poll(text = txtBox_desc.text.toString(),
                         UserId = "1",
-                        Choices = choices)
+                        Choices = choices,
+                        id ="1")
 
         //save pull.
         val result = async { ApiClient.submitPool(poll) }
+
+        val intent = Intent(this, PollActivity::class.java)
+        intent.putExtra(PollActivity.INTENT_POLL_ID, "1")
+        startActivity(intent)
     }
 
     private fun validatePoll(): Pair<Boolean,View?> {
@@ -107,13 +110,23 @@ class CreatePollActivity : AppCompatActivity() {
     }
 
     private fun addNewAnswer() {
-        //val listView = findViewById<ListView>(R.id.answerList)
+        val listView = findViewById<ListView>(R.id.answerList)
+        listView.requestFocus()
+        if(list.count() == 0){
+            var edittxt = EditText(this)
+            edittxt.hint = Example_Answer.toString()
+            edittxt.isSelected = true
+            edittxt.requestFocus()
+            list.add(edittxt)
+            answersAdapter.notifyDataSetChanged()
+
+        }
         var edittxt = EditText(this)
         edittxt.hint = Example_Answer.toString()
         edittxt.isSelected = true
+        edittxt.requestFocus()
         list.add(edittxt)
         answersAdapter.notifyDataSetChanged()
-
 
     }
 
