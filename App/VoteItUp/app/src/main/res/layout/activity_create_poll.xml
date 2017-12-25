@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="58dp"
+                    android:layout_marginTop="48dp"
                     android:fontFamily="@font/pacifico"
                     android:text="@string/crear_encuesta"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title"
@@ -71,13 +71,23 @@
                     android:text="@string/respuestas"
                     android:textAppearance="@style/TextAppearance.AppCompat.Title" />
 
+                <EditText
+                    android:id="@+id/text_add_new"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@+id/tv_AnwserLbl"
+                    android:layout_below="@id/tv_AnwserLbl"
+                    android:hint="@string/add_a_new_answer_here"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/plusAnswer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignBottom="@+id/tv_AnwserLbl"
-                    android:layout_toRightOf="@id/tv_AnwserLbl"
+                    android:layout_alignBottom="@+id/text_add_new"
                     android:layout_marginBottom="0dp"
+                    android:layout_toRightOf="@+id/text_add_new"
                     app:backgroundTint="@android:color/transparent"
                     app:elevation="24dp"
                     app:layout_anchorGravity="right|center"
@@ -88,7 +98,7 @@
                     android:id="@+id/answerList"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_below="@+id/tv_AnwserLbl"
+                    android:layout_below="@+id/text_add_new"
                     android:layout_margin="10dp"
                     android:layout_marginLeft="20dp"
                     android:layout_marginRight="20dp"

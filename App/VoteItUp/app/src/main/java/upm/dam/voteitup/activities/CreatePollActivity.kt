@@ -1,11 +1,13 @@
 package upm.dam.voteitup.activities
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.inputmethodservice.Keyboard
 import android.inputmethodservice.KeyboardView
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.*
@@ -17,32 +19,28 @@ import upm.dam.voteitup.R.string.Example_Answer
 import upm.dam.voteitup.adapters.AnswerListAdapter
 import upm.dam.voteitup.entities.Choice
 import upm.dam.voteitup.entities.Poll
+import java.util.ArrayList
+import java.util.function.Consumer
 
 
 class CreatePollActivity : AppCompatActivity() {
 
     private lateinit var answersAdapter: AnswerListAdapter
 
-    private lateinit var list: MutableList<EditText>
+    private lateinit var list: MutableList<TextView>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_poll)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
-
-        list = mutableListOf<EditText>()
+        list = mutableListOf<TextView>()
         answersAdapter = AnswerListAdapter(baseContext,
                 listData = list)
         val listView = findViewById<ListView>(R.id.answerList)
         listView.adapter = answersAdapter
-
         plusAnswer.setOnClickListener { addNewAnswer() }
         savePoll.setOnClickListener{ attmeptCreatePoll()}
-        answerList.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            val item = answersAdapter.getItem(position)
-            answersAdapter.notifyDataSetChanged()
-        }
         txtBox_desc.requestFocus()
 
     }
@@ -72,7 +70,6 @@ class CreatePollActivity : AppCompatActivity() {
 
         //save pull.
         val result = async { ApiClient.submitPool(poll) }
-
         val intent = Intent(this, PollActivity::class.java)
         intent.putExtra(PollActivity.INTENT_POLL_ID, "1")
         startActivity(intent)
@@ -111,24 +108,44 @@ class CreatePollActivity : AppCompatActivity() {
 
     private fun addNewAnswer() {
         val listView = findViewById<ListView>(R.id.answerList)
-        listView.requestFocus()
-        if(list.count() == 0){
-            var edittxt = EditText(this)
-            edittxt.hint = Example_Answer.toString()
-            edittxt.isSelected = true
-            edittxt.requestFocus()
-            list.add(edittxt)
-            answersAdapter.notifyDataSetChanged()
-
-        }
-        var edittxt = EditText(this)
-        edittxt.hint = Example_Answer.toString()
-        edittxt.isSelected = true
-        edittxt.requestFocus()
+        var edittxt = TextView(this)
+        edittxt.text = text_add_new.text
         list.add(edittxt)
+        answersAdapter.notifyDataSetChanged()
+        text_add_new.setText("")
+    }
+
+    override fun onConfigurationChanged(newConfig: Configuration?) {
+        super.onConfigurationChanged(newConfig)
+    }
+
+    public override fun onSaveInstanceState(savedInstanceState: Bundle?) {
+        super.onSaveInstanceState(savedInstanceState)
+        // Save UI state changes to the savedInstanceState.
+        // This bundle will be passed to onCreate if the process is
+        // killed and restarted.
+        savedInstanceState!!.putStringArrayList("list", (list).filter{ it ->
+            it.text.isNotBlank() && it.text.isNotEmpty() }.map{it.text.toString()}
+                as ArrayList<String>?)
+
+    }
+
+    public override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        // Restore UI state from the savedInstanceState.
+        // This bundle has also been passed to onCreate.
+        val listStrings =  savedInstanceState.getStringArrayList("list")
+
+        listStrings.forEach(){
+            var tv = TextView(this)
+            tv.text=it
+            list.add(tv)
+            Log.d("Debug", "added" + it)
+        }
         answersAdapter.notifyDataSetChanged()
 
     }
+
 
     /// <summary>
 /// Make sure a list view item is within the visible area of the list view
