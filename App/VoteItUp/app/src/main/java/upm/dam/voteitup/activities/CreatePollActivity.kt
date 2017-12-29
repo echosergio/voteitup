@@ -19,6 +19,7 @@ import upm.dam.voteitup.R.string.Example_Answer
 import upm.dam.voteitup.adapters.AnswerListAdapter
 import upm.dam.voteitup.entities.Choice
 import upm.dam.voteitup.entities.Poll
+import upm.dam.voteitup.entities.Poll_POST
 import java.util.ArrayList
 import java.util.function.Consumer
 
@@ -52,21 +53,16 @@ class CreatePollActivity : AppCompatActivity() {
             return
         }
         //get info
-        val listAnswers = (list).filterNot{ editText ->
-            editText.text.isNotBlank()
-                    && editText.text.isNotEmpty() }
+        val listAnswers = (list).filter{ editText ->
+            editText.text.isNotBlank() && editText.text.isNotEmpty() }
                 .map { it.text.toString()}
-        val choices = mutableListOf<Choice>()
-        var i = 0
+        val choices = mutableListOf<String>()
         listAnswers.forEach { choice ->
-            choices.add(Choice(id= i , text = choice) )
-            i++
+            choices.add(choice)
         }
 
-        var poll = Poll(text = txtBox_desc.text.toString(),
-                        UserId = "1",
-                        Choices = choices,
-                        id ="1")
+        var poll = Poll_POST(text = txtBox_desc.text.toString(),
+                            choices = choices)
 
         //save pull.
         val result = async { ApiClient.submitPool(poll) }

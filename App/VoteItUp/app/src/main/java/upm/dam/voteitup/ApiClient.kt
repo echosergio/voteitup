@@ -6,11 +6,13 @@ import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.result.Result
 import com.google.gson.Gson
 import upm.dam.voteitup.entities.Poll
+import upm.dam.voteitup.entities.Poll_POST
 
 object ApiClient {
 
     var URL: String? = null
     var JWT: String? = null
+    var User_Id:String = "1"
 
     suspend fun getAuthToken(email: String, password: String): String? {
 
@@ -88,12 +90,12 @@ object ApiClient {
         }
     }
 
-    fun submitPool(poll: Poll): Any {
+    fun submitPool(poll: Poll_POST): Any {
         ///api/v1/users/<ID>/polls
 
         val poll_json = Gson().toJson(poll)
         val (_, _, result) = Fuel
-                .post("$URL/api/v1/users/$poll.UserId/polls")
+                .post("$URL/api/v1/users/$User_Id/polls")
                 .header("Content-Type" to "application/json")
                 .header("Authorization" to "bearer $JWT")
                 .body(poll_json)
