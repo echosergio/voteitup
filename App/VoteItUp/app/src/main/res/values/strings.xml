@@ -37,6 +37,9 @@
     <string name="save_poll_text">Save Poll</string>
     <string name="error_desc_empty">Necestiamos alguna description</string>
     <string name="error_two_answers_needed">Se necesitan al menos dos posibles respuestas</string>
-    <string name="action_register">Join!</string>
+    <string name="action_register">¡Create a user!</string>
     <string name="add_a_new_answer_here">Add a new answer here</string>
+    <string name="prompt_UserName">User Name</string>
+    <string name="prompt_bio">Bio</string>
+    <string name="small_bio_about_myself">Small bio about myself</string>
 </resources>

@@ -17,16 +17,35 @@
 
     <ScrollView
         android:id="@+id/registration_form"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
 
-        android:layout_height="270dp"
+        android:layout_height="match_parent"
         android:clipToPadding="false">
 
         <LinearLayout
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:theme="@style/LoginTextLabel">
+
+                <AutoCompleteTextView
+                    android:id="@+id/user_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:hint="@string/prompt_UserName"
+                    android:inputType="textEmailAddress"
+                    android:maxLines="1"
+                    android:singleLine="true"
+                    android:textColor="@color/ic_launcher_background"
+                    android:textSize="18sp" />
+
+            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -42,7 +61,6 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="carles@mail.com"
                     android:textColor="@color/ic_launcher_background"
                     android:textSize="18sp" />
 
@@ -59,27 +77,39 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
                     android:hint="@string/prompt_password"
+                    android:text="1234"
                     android:imeActionId="6"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="1234"
                     android:textColor="@color/ic_launcher_background"
                     android:textSize="18sp" />
 
             </android.support.design.widget.TextInputLayout>
 
-            <Button
-                android:id="@+id/email_sign_in_button"
-                style="?android:textAppearanceSmall"
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:fontFamily="@font/montserrat"
-                android:text="@string/action_sign_in_short"
-                android:textStyle="bold" />
+                android:theme="@style/LoginTextLabel">
+
+                <EditText
+                    android:id="@+id/txtBio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:hint="@string/small_bio_about_myself"
+                    android:imeActionId="6"
+                    android:imeActionLabel="@string/action_sign_in_short"
+                    android:imeOptions="actionUnspecified"
+                    android:inputType="textMultiLine"
+                    android:maxLines="10"
+                    android:singleLine="false"
+                    android:textColor="@color/ic_launcher_background"
+                    android:textSize="18sp" />
+
+            </android.support.design.widget.TextInputLayout>
 
             <Button
                 android:id="@+id/email_register_button"
@@ -89,9 +119,19 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/action_register"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:onClick="attemptCreateUser"
+                />
 
         </LinearLayout>
     </ScrollView>
+    <!-- Login progress -->
+    <ProgressBar
+        android:id="@+id/registration_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="82dp"
+        android:layout_height="57dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
 
 </android.support.constraint.ConstraintLayout>
