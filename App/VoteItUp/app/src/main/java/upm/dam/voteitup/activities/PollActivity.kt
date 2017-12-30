@@ -47,10 +47,9 @@ class PollActivity : AppCompatActivity() {
 
             val pollBarChart = PollBarChart(choices!!)
             var typeFace: Typeface? = ResourcesCompat.getFont(baseContext, R.font.roboto_light)
-            pollBarChart.typeFace = typeFace
-            val horizontalBarChart2 = pollBarChart.getChart(horizontalBarChart)
 
-            horizontalBarChart2.invalidate()
+            pollBarChart.typeFace = typeFace
+            pollBarChart.getChart(horizontalBarChart).invalidate()
 
             val activities = mutableListOf(
                     Activity(134534, "01-11-2017"),

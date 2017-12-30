@@ -4,10 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.*
-import kotlinx.android.synthetic.main.activity_main.*
 import com.ittianyu.bottomnavigationviewex.BottomNavigationViewEx
+import kotlinx.android.synthetic.main.activity_main.*
 import upm.dam.voteitup.R
-import upm.dam.voteitup.fragments.PollsFragment
+import upm.dam.voteitup.fragments.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,11 +28,9 @@ class MainActivity : AppCompatActivity() {
 
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
-                R.id.action_home -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.mainFragment, PollsFragment()).commit()
-                }
+                R.id.action_home -> supportFragmentManager.beginTransaction().replace(R.id.mainFragment, PollsFragment()).commit()
                 R.id.action_search -> Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show()
-                R.id.action_profile -> Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
+                R.id.action_profile -> supportFragmentManager.beginTransaction().replace(R.id.mainFragment, ProfileFragment()).commit()
                 R.id.action_settings -> Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
             }
 
@@ -40,10 +38,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         if (mainFragment != null) {
-            if (savedInstanceState != null) {
-                return
-            }
-
+            if (savedInstanceState != null) null
             supportFragmentManager.beginTransaction().add(R.id.mainFragment, PollsFragment()).commit()
         }
     }
