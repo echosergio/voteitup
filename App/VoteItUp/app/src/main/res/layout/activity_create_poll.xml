@@ -79,16 +79,16 @@
                     android:hint="@string/add_a_new_answer_here"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
-
                 <android.support.design.widget.FloatingActionButton
                     android:id="@+id/plusAnswer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/text_add_new"
                     android:layout_marginBottom="0dp"
-                    android:layout_toRightOf="@+id/text_add_new"
+                    android:layout_toEndOf="@+id/text_add_new"
                     app:backgroundTint="@android:color/transparent"
-                    app:elevation="24dp"
+                    app:elevation="0sp"
+                    app:borderWidth="0sp"
                     app:layout_anchorGravity="right|center"
                     app:rippleColor="@color/white"
                     app:srcCompat="@drawable/plus_icon" />
@@ -98,9 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/text_add_new"
-                    android:layout_margin="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="20dp"
+                    android:layout_margin="20sp"
                     android:descendantFocusability="afterDescendants"
                     android:drawSelectorOnTop="false"
                     android:focusable="false"
