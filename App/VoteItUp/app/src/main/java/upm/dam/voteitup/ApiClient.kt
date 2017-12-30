@@ -1,6 +1,5 @@
 package upm.dam.voteitup
 
-import android.support.v4.util.Pools
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.result.Result
@@ -8,11 +7,19 @@ import com.google.gson.Gson
 import upm.dam.voteitup.entities.Poll
 import upm.dam.voteitup.entities.Poll_POST
 import upm.dam.voteitup.entities.User
+import io.jsonwebtoken.Jwts
+import io.jsonwebtoken.SignatureException
+import io.jsonwebtoken.Claims
+import io.jsonwebtoken.JwsHeader
+import io.jsonwebtoken.SigningKeyResolverAdapter
+
+
+
 
 object ApiClient {
 
     var URL: String? = null
-    var JWT: String? = null
+    var TOKEN: String? = null
     var User_Id:String = "1"
 
     suspend fun getAuthToken(email: String, password: String): String? {
@@ -35,11 +42,9 @@ object ApiClient {
 
     suspend fun getPoll(id: Int): Poll? {
 
-        val polls = mutableListOf<Poll>()
-
         val (_, _, result) = Fuel
                 .get("$URL/api/v1/polls/$id")
-                .header("Authorization" to "bearer $JWT")
+                .header("Authorization" to "bearer $TOKEN")
                 .responseJson()
 
         return when (result) {
@@ -47,7 +52,7 @@ object ApiClient {
                 null
             }
             is Result.Success -> {
-                if (result.value.content.isNullOrBlank()) { null }
+                if (result.value.content.isBlank()) { null }
                 else Gson().fromJson(result.value.obj().toString(), Poll::class.java)
             }
         }
@@ -59,7 +64,7 @@ object ApiClient {
 
         val (_, _, result) = Fuel
                 .get("$URL/api/v1/polls")
-                .header("Authorization" to "bearer $JWT")
+                .header("Authorization" to "bearer $TOKEN")
                 .responseJson()
 
         return when (result) {
@@ -78,7 +83,7 @@ object ApiClient {
 
         val (_, _, result) = Fuel
                 .get("$URL/api/v1/polls?keyword=$keyword")
-                .header("Authorization" to "bearer $JWT")
+                .header("Authorization" to "bearer $TOKEN")
                 .responseJson()
 
         return when (result) {
@@ -92,13 +97,12 @@ object ApiClient {
     }
 
     fun submitPool(poll: Poll_POST): Any {
-        ///api/v1/users/<ID>/polls
 
         val poll_json = Gson().toJson(poll)
         val (_, _, result) = Fuel
                 .post("$URL/api/v1/users/$User_Id/polls")
                 .header("Content-Type" to "application/json")
-                .header("Authorization" to "bearer $JWT")
+                .header("Authorization" to "bearer $TOKEN")
                 .body(poll_json)
                 .responseJson()
 
@@ -112,7 +116,45 @@ object ApiClient {
         }
     }
 
-    fun submitUser(submit_user: User): Any {
+    suspend fun getUser(id: Int): User? {
+
+        val (_, _, result) = Fuel
+                .get("$URL/api/v1/users/$id")
+                .header("Authorization" to "bearer $TOKEN")
+                .responseJson()
+
+        return when (result) {
+            is Result.Failure -> {
+                null
+            }
+            is Result.Success -> {
+                if (result.value.content.isBlank()) { null }
+                else Gson().fromJson(result.value.obj().toString(), User::class.java)
+            }
+        }
+    }
+
+    suspend fun getCurrentUser(): User? {
+
+        var currentUserId = getCurrentUserId();
+
+        val (_, _, result) = Fuel
+                .get("$URL/api/v1/users/$currentUserId")
+                .header("Authorization" to "bearer $TOKEN")
+                .responseJson()
+
+        return when (result) {
+            is Result.Failure -> {
+                null
+            }
+            is Result.Success -> {
+                if (result.value.content.isBlank()) { null }
+                else Gson().fromJson(result.value.obj().toString(), User::class.java)
+            }
+        }
+    }
+
+    suspend fun submitUser(submit_user: User): Any {
         //Todo: Fix the back to be able to perform the registration without token! :O
         val token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.kHZQ03yhLOPC1c7f6CdItQbT2ljvMQLbucdJVkqwEKs"
         val user_json = Gson().toJson(submit_user)
@@ -133,4 +175,25 @@ object ApiClient {
         }
     }
 
+    private fun getCurrentUserId(): Int {
+        return decodeToken(TOKEN!!)!!["id"].toString().toInt();
+    }
+
+    private fun decodeToken(token: String): Claims? {
+        var tokenClaims: Claims? = null
+
+        try {
+            // This hacky thing is to allow getting the claims without caring about the signature.
+            Jwts.parser().setSigningKeyResolver(object : SigningKeyResolverAdapter() {
+                override fun resolveSigningKeyBytes(header: JwsHeader<*>?, claims: Claims?): ByteArray {
+                    tokenClaims = claims
+                    return "0".toByteArray()
+                }
+            }).parseClaimsJws(token)
+        } catch (e: SignatureException) {
+            e.printStackTrace()
+        }
+
+        return tokenClaims
+    }
 }

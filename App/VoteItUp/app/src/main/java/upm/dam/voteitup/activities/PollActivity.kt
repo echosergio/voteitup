@@ -35,10 +35,7 @@ class PollActivity : AppCompatActivity() {
         val getPollsAsync = async { ApiClient.getPoll(pollId.toInt()) }
 
         launch(UI) {
-            val poll = getPollsAsync.await()!!
-            if(poll == null){
-                error("Error on retrieving Poll info")
-            }
+            val poll = getPollsAsync.await() ?: error("Error retrieving Poll info")
 
             val pollText = findViewById<TextView>(R.id.pollText)
             pollText.text = poll.text

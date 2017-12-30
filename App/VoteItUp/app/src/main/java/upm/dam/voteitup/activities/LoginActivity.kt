@@ -40,7 +40,7 @@ class LoginActivity : AppCompatActivity() {
         val token = sharedPreferences!!.getString(TOKEN, null)
 
         if (token != null) {
-            ApiClient.JWT = token
+            ApiClient.TOKEN = token
             enterApp()
         }
 
@@ -64,8 +64,6 @@ class LoginActivity : AppCompatActivity() {
             password.setText(user_pass)
             this.attemptLogin();
         }
-
-
     }
 
     private fun goToRegistration() {
@@ -125,7 +123,7 @@ class LoginActivity : AppCompatActivity() {
                 } else {
                     mProgressBar.visibility = View.GONE
 
-                    ApiClient.JWT = token
+                    ApiClient.TOKEN = token
 
                     val editor = sharedPreferences!!.edit()
                     editor.putString(TOKEN, token)
