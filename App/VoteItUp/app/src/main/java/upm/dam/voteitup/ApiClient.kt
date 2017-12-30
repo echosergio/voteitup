@@ -1,15 +1,19 @@
 package upm.dam.voteitup
 
+import android.support.v4.util.Pools
 import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.result.Result
 import com.google.gson.Gson
 import upm.dam.voteitup.entities.Poll
+import upm.dam.voteitup.entities.Poll_POST
+import upm.dam.voteitup.entities.User
 
 object ApiClient {
 
     var URL: String? = null
     var JWT: String? = null
+    var User_Id:String = "1"
 
     suspend fun getAuthToken(email: String, password: String): String? {
 
@@ -43,7 +47,8 @@ object ApiClient {
                 null
             }
             is Result.Success -> {
-                Gson().fromJson(result.value.obj().toString(), Poll::class.java)
+                if (result.value.content.isNullOrBlank()) { null }
+                else Gson().fromJson(result.value.obj().toString(), Poll::class.java)
             }
         }
     }
@@ -85,4 +90,47 @@ object ApiClient {
             }
         }
     }
+
+    fun submitPool(poll: Poll_POST): Any {
+        ///api/v1/users/<ID>/polls
+
+        val poll_json = Gson().toJson(poll)
+        val (_, _, result) = Fuel
+                .post("$URL/api/v1/users/$User_Id/polls")
+                .header("Content-Type" to "application/json")
+                .header("Authorization" to "bearer $JWT")
+                .body(poll_json)
+                .responseJson()
+
+        return when (result) {
+            is Result.Failure -> {
+                false
+            }
+            is Result.Success -> {
+                true
+            }
+        }
+    }
+
+    fun submitUser(submit_user: User): Any {
+        //Todo: Fix the back to be able to perform the registration without token! :O
+        val token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.kHZQ03yhLOPC1c7f6CdItQbT2ljvMQLbucdJVkqwEKs"
+        val user_json = Gson().toJson(submit_user)
+        val (_, _, result) = Fuel
+                .post("$URL/api/v1/users/")
+                .header("Content-Type" to "application/json")
+                .header("Authorization" to "bearer $token")
+                .body(user_json)
+                .responseJson()
+
+        return when (result) {
+            is Result.Failure -> {
+                false
+            }
+            is Result.Success -> {
+                true
+            }
+        }
+    }
+
 }

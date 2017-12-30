@@ -8,3 +8,9 @@ data class Poll(
         val Choices: List<Choice>? = null,
         val UserId: String? = null
 )
+
+data class Poll_POST(
+        val text: String? = null,
+        val area: Area = Area(country = "",city = ""),
+        val choices: List<String>? = null
+)

@@ -35,9 +35,16 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
+            android:configChanges="orientation"
             android:name=".activities.CreatePollActivity"
             android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:configChanges="orientation"
+            android:name=".activities.RegistrationActivity"
+            android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan"/>
+
     </application>
 
 </manifest>

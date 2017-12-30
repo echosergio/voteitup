@@ -11,6 +11,7 @@ import upm.dam.voteitup.charts.PollBarChart
 import upm.dam.voteitup.charts.PollActivityLineChart
 import upm.dam.voteitup.entities.Activity
 import android.content.Intent
+import android.util.Log
 import upm.dam.voteitup.entities.Poll
 import android.widget.TextView
 import kotlinx.coroutines.experimental.android.UI
@@ -35,6 +36,9 @@ class PollActivity : AppCompatActivity() {
 
         launch(UI) {
             val poll = getPollsAsync.await()!!
+            if(poll == null){
+                error("Error on retrieving Poll info")
+            }
 
             val pollText = findViewById<TextView>(R.id.pollText)
             pollText.text = poll.text
@@ -69,7 +73,7 @@ class PollActivity : AppCompatActivity() {
 
     companion object {
 
-        private val INTENT_POLL_ID = "poll_id"
+        val INTENT_POLL_ID = "poll_id"
 
         fun newIntent(context: Context, poll: Poll): Intent {
             val intent = Intent(context, PollActivity::class.java)

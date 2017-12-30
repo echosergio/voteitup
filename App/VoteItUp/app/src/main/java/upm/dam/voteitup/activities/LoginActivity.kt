@@ -16,6 +16,8 @@ import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import upm.dam.voteitup.ApiClient
 import upm.dam.voteitup.R
+import upm.dam.voteitup.Validators
+import upm.dam.voteitup.entities.User
 
 class LoginActivity : AppCompatActivity() {
 
@@ -31,9 +33,9 @@ class LoginActivity : AppCompatActivity() {
         ApiClient.URL = resources.getString(R.string.api_url)
 
         // DEV: To reset user token
-        // val editor = sharedPreferences!!.edit()
-        // editor.remove(TOKEN)
-        // editor.apply()
+         val editor = sharedPreferences!!.edit()
+         editor.remove(TOKEN)
+         editor.apply()
 
         val token = sharedPreferences!!.getString(TOKEN, null)
 
@@ -52,6 +54,24 @@ class LoginActivity : AppCompatActivity() {
         })
 
         email_sign_in_button.setOnClickListener { attemptLogin() }
+        email_register_button.setOnClickListener{goToRegistration()}
+
+        val user_email = intent.getStringExtra(USER_EMAIL)
+        val user_pass = intent.getStringExtra(PASS)
+
+        if(user_email != null && user_pass != null){
+            email.setText(user_email)
+            password.setText(user_pass)
+            this.attemptLogin();
+        }
+
+
+    }
+
+    private fun goToRegistration() {
+        val intent = Intent(this, RegistrationActivity::class.java)
+        startActivity(intent)
+        finish()
     }
 
     private fun attemptLogin() {
@@ -71,7 +91,7 @@ class LoginActivity : AppCompatActivity() {
         var focusView: View? = null
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(passwordStr) && !isPasswordValid(passwordStr)) {
+        if (!TextUtils.isEmpty(passwordStr) && !Validators().isPasswordValid(passwordStr)) {
             password.error = getString(R.string.error_invalid_password)
             focusView = password
             cancel = true
@@ -82,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
             email.error = getString(R.string.error_field_required)
             focusView = email
             cancel = true
-        } else if (!isEmailValid(emailStr)) {
+        } else if (!Validators().isEmailValid(emailStr)) {
             email.error = getString(R.string.error_invalid_email)
             focusView = email
             cancel = true
@@ -117,17 +137,22 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun isEmailValid(email: String): Boolean {
-        return email.contains("@")
-    }
-
-    private fun isPasswordValid(password: String): Boolean {
-        return password.length > 3
-    }
-
     private fun enterApp(): Unit {
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
+    }
+
+    companion object {
+
+        val USER_EMAIL = "user_email"
+        val PASS = "pass"
+
+        fun newIntent(context: Context, user: User): Intent {
+            val intent = Intent(context, LoginActivity::class.java)
+            intent.putExtra(USER_EMAIL, user.email)
+            intent.putExtra(PASS, user.password)
+            return intent
+        }
     }
 }
