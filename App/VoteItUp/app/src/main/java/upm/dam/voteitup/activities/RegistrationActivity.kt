@@ -14,7 +14,6 @@ import kotlinx.coroutines.experimental.launch
 import upm.dam.voteitup.ApiClient
 import upm.dam.voteitup.R
 import upm.dam.voteitup.Validators
-import upm.dam.voteitup.entities.Poll_POST
 import upm.dam.voteitup.entities.User
 
 class RegistrationActivity : AppCompatActivity() {
@@ -23,8 +22,8 @@ class RegistrationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
-        email_register_button.setOnClickListener{ attemptCreateUser()}
-        password.setOnClickListener{password.text.clear()}
+        email_register_button.setOnClickListener { attemptCreateUser() }
+        password.setOnClickListener { password.text.clear() }
     }
 
     private fun attemptCreateUser() {
@@ -33,22 +32,23 @@ class RegistrationActivity : AppCompatActivity() {
             validateRegistration().second!!.requestFocus()
             return
         }
-        //get info
-        val submit_user = User(email = email.text.toString(),
-                                password = password.text.toString(),
-                                username = user_name.text.toString(),
-                                bio = txtBio.text.toString())
 
+        //get info
+        val submit_user = User(
+                email = email.text.toString(),
+                password = password.text.toString(),
+                username = user_name.text.toString(),
+                bio = txtBio.text.toString())
 
         //save user.
         val mProgressBar = findViewById<ProgressBar>(R.id.registration_progress);
         mProgressBar.visibility = View.VISIBLE
-        val result = async { ApiClient.submitUser(submit_user) }
 
+        val result = async { ApiClient.submitUser(submit_user) }
         launch(UI) {
             val result = result.await()
             mProgressBar.visibility = View.GONE
-            if (result == true){
+            if (result == true) {
                 goToLogin()
             }
         }
@@ -59,6 +59,7 @@ class RegistrationActivity : AppCompatActivity() {
         intent.putExtra(LoginActivity.USER_EMAIL, email.text.toString())
         intent.putExtra(LoginActivity.PASS, password.text.toString())
         startActivity(intent)
+        finish()
     }
 
     private fun validateRegistration(): Pair<Boolean, View?> {
@@ -77,8 +78,7 @@ class RegistrationActivity : AppCompatActivity() {
             focusView = user_name
             cancel = true
         }
-        if (TextUtils.isEmpty(password.text) ||
-                !Validators().isPasswordValid(password.text.toString())) {
+        if (TextUtils.isEmpty(password.text) || !Validators().isPasswordValid(password.text.toString())) {
             txtBox_desc.error = getString(R.string.error_field_required)
             focusView = password
             cancel = true
@@ -88,13 +88,13 @@ class RegistrationActivity : AppCompatActivity() {
             txtBox_desc.error = getString(R.string.error_field_required)
             focusView = email
             cancel = true
-        }else if (!Validators().isEmailValid(email.text.toString())) {
+        } else if (!Validators().isEmailValid(email.text.toString())) {
             email.error = getString(R.string.error_invalid_email)
             focusView = email
             cancel = true
         }
 
-        return Pair(!cancel,focusView)
+        return Pair(!cancel, focusView)
     }
 
 

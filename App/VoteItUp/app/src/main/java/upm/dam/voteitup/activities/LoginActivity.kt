@@ -54,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
         })
 
         email_sign_in_button.setOnClickListener { attemptLogin() }
-        email_register_button.setOnClickListener{goToRegistration()}
+        email_register_button.setOnClickListener{ goToRegistration() }
 
         val user_email = intent.getStringExtra(USER_EMAIL)
         val user_pass = intent.getStringExtra(PASS)

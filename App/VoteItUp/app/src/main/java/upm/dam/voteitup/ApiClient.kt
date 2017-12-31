@@ -13,9 +13,6 @@ import io.jsonwebtoken.Claims
 import io.jsonwebtoken.JwsHeader
 import io.jsonwebtoken.SigningKeyResolverAdapter
 
-
-
-
 object ApiClient {
 
     var URL: String? = null
@@ -99,6 +96,7 @@ object ApiClient {
     fun submitPool(poll: Poll_POST): Any {
 
         val poll_json = Gson().toJson(poll)
+
         val (_, _, result) = Fuel
                 .post("$URL/api/v1/users/$User_Id/polls")
                 .header("Content-Type" to "application/json")
@@ -154,14 +152,13 @@ object ApiClient {
         }
     }
 
-    suspend fun submitUser(submit_user: User): Any {
-        //Todo: Fix the back to be able to perform the registration without token! :O
-        val token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6MX0.kHZQ03yhLOPC1c7f6CdItQbT2ljvMQLbucdJVkqwEKs"
-        val user_json = Gson().toJson(submit_user)
+    suspend fun submitUser(user: User): Any {
+
+        val user_json = Gson().toJson(user)
+
         val (_, _, result) = Fuel
                 .post("$URL/api/v1/users/")
                 .header("Content-Type" to "application/json")
-                .header("Authorization" to "bearer $token")
                 .body(user_json)
                 .responseJson()
 
