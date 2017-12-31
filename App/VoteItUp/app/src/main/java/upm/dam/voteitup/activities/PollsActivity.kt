@@ -9,9 +9,8 @@ import android.support.v4.content.res.ResourcesCompat
 import com.github.mikephil.charting.charts.LineChart
 import upm.dam.voteitup.charts.PollBarChart
 import upm.dam.voteitup.charts.PollActivityLineChart
-import upm.dam.voteitup.entities.Activity
+import upm.dam.voteitup.entities.PollActivity
 import android.content.Intent
-import android.util.Log
 import upm.dam.voteitup.entities.Poll
 import android.widget.TextView
 import kotlinx.coroutines.experimental.android.UI
@@ -19,8 +18,9 @@ import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import upm.dam.voteitup.ApiClient
 import upm.dam.voteitup.R
+import upm.dam.voteitup.entities.UserActivity
 
-class PollActivity : AppCompatActivity() {
+class PollsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,13 +53,13 @@ class PollActivity : AppCompatActivity() {
             pollBarChart.getChart(horizontalBarChart).invalidate()
 
             val activities = mutableListOf(
-                    Activity(134534, "01-11-2017"),
-                    Activity(523325, "01-11-2017"),
-                    Activity(233225, "01-11-2017"),
-                    Activity(423434, "01-11-2017"),
-                    Activity(323424, "01-11-2017"),
-                    Activity(654645, "01-11-2017"),
-                    Activity(764564, "01-11-2017"))
+                    PollActivity(134534, "01-11-2017"),
+                    PollActivity(523325, "01-11-2017"),
+                    PollActivity(233225, "01-11-2017"),
+                    PollActivity(423434, "01-11-2017"),
+                    PollActivity(323424, "01-11-2017"),
+                    PollActivity(654645, "01-11-2017"),
+                    PollActivity(764564, "01-11-2017"))
 
             val pollActivityLineChart = PollActivityLineChart(activities)
             val lineChart2 = pollActivityLineChart.getChart(lineChart)
@@ -73,8 +73,14 @@ class PollActivity : AppCompatActivity() {
         val INTENT_POLL_ID = "poll_id"
 
         fun newIntent(context: Context, poll: Poll): Intent {
-            val intent = Intent(context, PollActivity::class.java)
+            val intent = Intent(context, PollsActivity::class.java)
             intent.putExtra(INTENT_POLL_ID, poll.id)
+            return intent
+        }
+
+        fun newIntent(context: Context, userActivity: UserActivity): Intent {
+            val intent = Intent(context, PollsActivity::class.java)
+            intent.putExtra(INTENT_POLL_ID, userActivity.id)
             return intent
         }
     }

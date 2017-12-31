@@ -10,7 +10,8 @@
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in_short">Login</string>
+    <string name="action_sign_in_short">Entrar</string>
+    <string name="action_register">¡Regístrate!</string>
     <string name="error_invalid_email">El email es inválido</string>
     <string name="error_invalid_password">La contraseña introducida es demasiado corta</string>
     <string name="error_incorrect_password">Email o contraseña incorrectos</string>
@@ -37,7 +38,6 @@
     <string name="save_poll_text">Save Poll</string>
     <string name="error_desc_empty">Necestiamos alguna description</string>
     <string name="error_two_answers_needed">Se necesitan al menos dos posibles respuestas</string>
-    <string name="action_register">¡Create a user!</string>
     <string name="add_a_new_answer_here">Add a new answer here</string>
     <string name="prompt_UserName">User Name</string>
     <string name="prompt_bio">Bio</string>

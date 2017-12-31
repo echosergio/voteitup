@@ -12,6 +12,7 @@ import io.jsonwebtoken.SignatureException
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.JwsHeader
 import io.jsonwebtoken.SigningKeyResolverAdapter
+import upm.dam.voteitup.entities.UserActivity
 
 object ApiClient {
 
@@ -132,26 +133,6 @@ object ApiClient {
         }
     }
 
-    suspend fun getCurrentUser(): User? {
-
-        var currentUserId = getCurrentUserId();
-
-        val (_, _, result) = Fuel
-                .get("$URL/api/v1/users/$currentUserId")
-                .header("Authorization" to "bearer $TOKEN")
-                .responseJson()
-
-        return when (result) {
-            is Result.Failure -> {
-                null
-            }
-            is Result.Success -> {
-                if (result.value.content.isBlank()) { null }
-                else Gson().fromJson(result.value.obj().toString(), User::class.java)
-            }
-        }
-    }
-
     suspend fun submitUser(user: User): Any {
 
         val user_json = Gson().toJson(user)
@@ -172,7 +153,26 @@ object ApiClient {
         }
     }
 
-    private fun getCurrentUserId(): Int {
+    suspend fun getUserActivity(id: Int): List<UserActivity>? {
+
+        val userActivities = mutableListOf<UserActivity>()
+
+        val (_, _, result) = Fuel
+                .get("$URL/api/v1/users/$id/activity")
+                .header("Authorization" to "bearer $TOKEN")
+                .responseJson()
+
+        return when (result) {
+            is Result.Failure -> {
+                null
+            }
+            is Result.Success -> {
+                (0 until result.value.array().length()).mapTo(userActivities) { Gson().fromJson(result.value.array()[it].toString(), UserActivity::class.java) }
+            }
+        }
+    }
+
+    fun getCurrentUserId(): Int {
         return decodeToken(TOKEN!!)!!["id"].toString().toInt();
     }
 

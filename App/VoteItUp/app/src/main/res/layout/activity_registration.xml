@@ -25,7 +25,8 @@
         <LinearLayout
             android:id="@+id/email_login_form"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
             android:orientation="vertical">
 
             <android.support.design.widget.TextInputLayout
@@ -77,13 +78,13 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
                     android:hint="@string/prompt_password"
-                    android:text="1234"
                     android:imeActionId="6"
                     android:imeActionLabel="@string/action_sign_in_short"
                     android:imeOptions="actionUnspecified"
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
+                    android:text="1234"
                     android:textColor="@color/ic_launcher_background"
                     android:textSize="18sp" />
 
@@ -119,9 +120,7 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/action_register"
-                android:textStyle="bold"
-                android:onClick="attemptCreateUser"
-                />
+                android:textStyle="bold" />
 
         </LinearLayout>
     </ScrollView>

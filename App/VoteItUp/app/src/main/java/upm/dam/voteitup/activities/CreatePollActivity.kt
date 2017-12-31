@@ -2,8 +2,6 @@ package upm.dam.voteitup.activities
 
 import android.content.Intent
 import android.content.res.Configuration
-import android.inputmethodservice.Keyboard
-import android.inputmethodservice.KeyboardView
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -15,13 +13,9 @@ import kotlinx.android.synthetic.main.activity_create_poll.*
 import kotlinx.coroutines.experimental.async
 import upm.dam.voteitup.ApiClient
 import upm.dam.voteitup.R
-import upm.dam.voteitup.R.string.Example_Answer
 import upm.dam.voteitup.adapters.AnswerListAdapter
-import upm.dam.voteitup.entities.Choice
-import upm.dam.voteitup.entities.Poll
 import upm.dam.voteitup.entities.Poll_POST
 import java.util.ArrayList
-import java.util.function.Consumer
 
 
 class CreatePollActivity : AppCompatActivity() {
@@ -66,8 +60,8 @@ class CreatePollActivity : AppCompatActivity() {
 
         //save pull.
         val result = async { ApiClient.submitPool(poll) }
-        val intent = Intent(this, PollActivity::class.java)
-        intent.putExtra(PollActivity.INTENT_POLL_ID, "1")
+        val intent = Intent(this, PollsActivity::class.java)
+        intent.putExtra(PollsActivity.INTENT_POLL_ID, "1")
         startActivity(intent)
     }
 

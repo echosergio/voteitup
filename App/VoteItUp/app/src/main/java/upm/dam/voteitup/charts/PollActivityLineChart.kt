@@ -6,9 +6,9 @@ import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
-import upm.dam.voteitup.entities.Activity
+import upm.dam.voteitup.entities.PollActivity
 
-class PollActivityLineChart constructor(activities: List<Activity>) {
+class PollActivityLineChart constructor(activities: List<PollActivity>) {
 
     private val entries = mutableListOf<Entry>()
 

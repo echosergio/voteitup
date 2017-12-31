@@ -14,7 +14,7 @@ import kotlinx.coroutines.experimental.launch
 import upm.dam.voteitup.ApiClient
 
 import upm.dam.voteitup.R
-import upm.dam.voteitup.activities.PollActivity
+import upm.dam.voteitup.activities.PollsActivity
 import upm.dam.voteitup.adapters.PollsListAdapter
 import upm.dam.voteitup.entities.Poll
 
@@ -26,7 +26,7 @@ class PollsFragment : Fragment() {
         val listView = view!!.findViewById<ListView>(R.id.pollsListView)
 
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, position, _ ->
-            val intent = PollActivity.newIntent(activity, listView.getItemAtPosition(position) as Poll)
+            val intent = PollsActivity.newIntent(activity, listView.getItemAtPosition(position) as Poll)
             startActivity(intent)
         }
 
