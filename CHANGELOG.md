@@ -4,12 +4,14 @@ Bitácora del proyecto
 ## 0.1.2 - 31-12-2017
 ### Añadido
 - Arreglada creación de usuarios 
-- Creación de actividad de perfil con informacón básica 
+- Creación de actividad de perfil con informacón básica de usuario
+- Lista con la actividad reciente del usuario en su perfil 
 - Obención del id del usuario actual mediante la información del token JWT almacenado
-- Cambios menores en la interfaz gráfica de creación de encuesta
 ### Modificado
 - Arreglado backend para permitir la creación de usuarios sin autenticación previa
 - Actualizada la documentación web de la API 
+- Cambios menores en la interfaz gráfica de creación de encuesta
+- Pequeños arreglos
 
 ## 0.1.1 - 15-12-2017
 ### Añadido
