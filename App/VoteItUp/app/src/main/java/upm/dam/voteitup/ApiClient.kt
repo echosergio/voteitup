@@ -18,7 +18,6 @@ object ApiClient {
 
     var URL: String? = null
     var TOKEN: String? = null
-    var User_Id:String = "1"
 
     suspend fun getAuthToken(email: String, password: String): String? {
 
@@ -97,9 +96,10 @@ object ApiClient {
     fun submitPool(poll: Poll_POST): Any {
 
         val poll_json = Gson().toJson(poll)
+        val userId = getCurrentUserId()
 
         val (_, _, result) = Fuel
-                .post("$URL/api/v1/users/$User_Id/polls")
+                .post("$URL/api/v1/users/$userId/polls")
                 .header("Content-Type" to "application/json")
                 .header("Authorization" to "bearer $TOKEN")
                 .body(poll_json)

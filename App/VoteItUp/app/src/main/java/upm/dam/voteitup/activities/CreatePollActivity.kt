@@ -41,12 +41,13 @@ class CreatePollActivity : AppCompatActivity() {
     }
 
     private fun attmeptCreatePoll() {
-        //areValid
+        // Are valid
         if (!validatePoll().first) {
             validatePoll().second!!.requestFocus()
             return
         }
-        //get info
+
+        // Get info
         val listAnswers = (list).filter{ editText ->
             editText.text.isNotBlank() && editText.text.isNotEmpty() }
                 .map { it.text.toString()}
@@ -55,14 +56,11 @@ class CreatePollActivity : AppCompatActivity() {
             choices.add(choice)
         }
 
-        var poll = Poll_POST(text = txtBox_desc.text.toString(),
-                            choices = choices)
+        var poll = Poll_POST(text = txtBox_desc.text.toString(), choices = choices)
 
-        //save pull.
-        val result = async { ApiClient.submitPool(poll) }
-        val intent = Intent(this, PollsActivity::class.java)
-        intent.putExtra(PollsActivity.INTENT_POLL_ID, "1")
-        startActivity(intent)
+        // Save poll
+        async { ApiClient.submitPool(poll) }
+        finish()
     }
 
     private fun validatePoll(): Pair<Boolean,View?> {
