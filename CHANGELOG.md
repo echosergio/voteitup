@@ -1,14 +1,25 @@
 # Changelog
 Bitácora del proyecto
 
-## 1.0.1 - 16-12-2017
+## 0.1.2 - 31-12-2017
 ### Añadido
-- Add fragments to main activity layouts
-- Update Kotlin version to 1.2.10
+- Arreglada creación de usuarios 
+- Creación de actividad de perfil con informacón básica 
+- Obención del id del usuario actual mediante la información del token JWT almacenado
+- Cambios menores en la interfaz gráfica de creación de encuesta
+### Modificado
+- Arreglado backend para permitir la creación de usuarios sin autenticación previa
+- Actualizada la documentación web de la API 
 
-## 1.0.0 - 2-12-2017
+## 0.1.1 - 15-12-2017
+### Añadido
+- Fragment layouts añadidos a la actividad principal para mejorar la organización de las actividades
+- Creación de actividad para crear una encuesta
+
+## 0.1.0 - 2-12-2017
 ### Añadido
 - Creado Api de cliente y añadidas corrutinas de kotlin
+- Validación del código para demo y tag de version
 
 ## 0.0.8 - 30-11-2017
 ### Añadido
