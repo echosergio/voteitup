@@ -42,4 +42,5 @@
     <string name="prompt_UserName">User Name</string>
     <string name="prompt_bio">Bio</string>
     <string name="small_bio_about_myself">Small bio about myself</string>
+    <string name="title_activity_near_by">Map</string>
 </resources>

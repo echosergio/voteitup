@@ -193,4 +193,25 @@ object ApiClient {
 
         return tokenClaims
     }
+
+    fun getAllPolls(): MutableList<Poll> {
+
+        val (_, _, result) = Fuel
+                .get("$URL/api/v1/polls")
+                .header("Authorization" to "bearer $TOKEN")
+                .responseJson()
+        val polls = mutableListOf<Poll>()
+
+        return when (result) {
+            is Result.Failure -> {
+                polls
+            }
+            is Result.Success -> {
+                if (result.value.content.isBlank()) { polls }
+                else (0 until result.value.array().length()).mapTo(polls)
+                    { Gson().fromJson(result.value.array()[it].toString(), Poll::class.java) }
+            }
+        }
+
+    }
 }

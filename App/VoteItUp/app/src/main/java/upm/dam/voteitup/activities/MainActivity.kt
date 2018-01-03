@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         bottomNavigationView.setOnNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.action_home -> supportFragmentManager.beginTransaction().replace(R.id.mainFragment, PollsFragment()).commit()
-                R.id.action_search -> Toast.makeText(this, "Search", Toast.LENGTH_SHORT).show()
+                R.id.action_search -> startActivity(Intent(this, NearByActivity::class.java))
                 R.id.action_profile -> supportFragmentManager.beginTransaction().replace(R.id.mainFragment, ProfileFragment()).commit()
                 R.id.action_settings -> Toast.makeText(this, "Settings", Toast.LENGTH_SHORT).show()
             }
