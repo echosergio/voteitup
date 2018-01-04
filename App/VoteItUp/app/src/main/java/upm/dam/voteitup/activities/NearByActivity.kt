@@ -66,10 +66,9 @@ class NearByActivity : AppCompatActivity(), OnMapReadyCallback {
         if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                 Manifest.permission.ACCESS_COARSE_LOCATION)) {
             // Show an explanation to the user *asynchronously*
-
         } else ActivityCompat.requestPermissions(this,
                 arrayOf(Manifest.permission.ACCESS_COARSE_LOCATION),ACCESS_COARSE_LOCATION_RESULT)
-//https://google-developer-training.gitbooks.io/android-developer-advanced-course-practicals/content/unit-4-add-geo-features-to-your-apps/lesson-7-location/7-1-p-use-the-device-location/7-1-p-use-the-device-location.html#task4intro
+
         if(isLocationAllowed){
             mLocationCallback = object : LocationCallback() {
                 override fun onLocationResult(locationResult: LocationResult) {
@@ -113,17 +112,18 @@ class NearByActivity : AppCompatActivity(), OnMapReadyCallback {
             val polls = getPollsAsync.await() ?: error("Error retrieving Poll info")
             mHashMap= HashMap()
             polls.filter{it.Area != null}.forEach {
-                    var coordinatesCityCountry = getCoordinatesFrom(it.Area!!)
-
-
-                    val marker = mMap.addMarker(MarkerOptions()
-                                    .position(LatLng(coordinatesCityCountry?.second!!,
-                                                     coordinatesCityCountry?.first!!))
-                                    .title(it.text))
-                    mHashMap.put(marker, it.id!!.toInt())
+                var coordinatesCityCountry = getCoordinatesFrom(it.Area!!)
+                if(coordinatesCityCountry != null) {
+                        val marker = mMap.addMarker(MarkerOptions()
+                                .position(LatLng(coordinatesCityCountry.second!!,
+                                        coordinatesCityCountry.first!!))
+                                .title(it.text))
+                        mHashMap.put(marker, it.id!!.toInt())
+                    }
 
                 }
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(0.0, 0.0)))
+
+
         }
         mMap.setOnInfoWindowClickListener({
             marker ->
@@ -141,10 +141,12 @@ class NearByActivity : AppCompatActivity(), OnMapReadyCallback {
                 // Got last known location. In some rare situations this can be null.
                 if (location != null) {
                     mMap.moveCamera(CameraUpdateFactory.
-                            newLatLng(LatLng(location.latitude,location.longitude)))
+                            newLatLngZoom(LatLng(location.latitude,location.longitude), 10.0F))
+
                 }
             }
-        }
+        }else
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(LatLng(0.0, 0.0)))
     }
 
     @RequiresApi(Build.VERSION_CODES.N)
@@ -152,19 +154,21 @@ class NearByActivity : AppCompatActivity(), OnMapReadyCallback {
 
         val gcd = Geocoder(this.baseContext, Locale.getDefault())
         ///the best would be add the size of the +-(city or country)/2, but for now are random!
-        val offsetLo = (-0.01..0.01).random()
-        val offsetLa = (-0.01..0.01).random()
+        val offsetLo = (-0.02..0.02).random()
+        val offsetLa = (-0.02..0.02).random()
 
         if(area.city?.isNotBlank()!!){
             val location= gcd.getFromLocationName(area.city,1).firstOrNull()
-            return Pair(location?.longitude!!.plus(offsetLo),location?.latitude.plus(offsetLa))
+            if (location != null)
+                return Pair(location?.longitude!!.plus(offsetLo),location?.latitude.plus(offsetLa))
         }
 
         else if(area.country?.isNotBlank()!!) {
             val location= gcd.getFromLocationName(area.country, 1).firstOrNull()
-            return Pair(location?.longitude!!.plus(offsetLo),location?.latitude!!.plus(offsetLa))
+            if (location != null)
+                return Pair(location?.longitude!!.plus(offsetLo),location?.latitude!!.plus(offsetLa))
         }
-        else return null
+        return null
     }
 
     protected fun createLocationRequest() {

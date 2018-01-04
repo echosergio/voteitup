@@ -43,4 +43,7 @@
     <string name="prompt_bio">Bio</string>
     <string name="small_bio_about_myself">Small bio about myself</string>
     <string name="title_activity_near_by">Map</string>
+    <string name="posicion_actual">Posicion Actual</string>
+    <string name="country">Country</string>
+    <string name="city">City</string>
 </resources>
