@@ -1,6 +1,21 @@
 # Changelog
 Bitácora del proyecto
 
+## 0.1.3 - 2-1-2017
+### Modificado
+ - Localizacion Fixed.
+ - Actividad de Crear encuesta: nuevos controles para ciudad y pais. Boton de autocompletado.
+### Issues
+ - Problemas con emulador y maps.
+ - Problemas con emulador y "last location"
+
+## 0.1.3 - 2-1-2017
+### Añadido
+ - Añadir actividad de cerca de ti.
+ - Localizacion con fuzzyLocaton (basada en last location)
+### Issues
+ - Perdida de tiempo monumental con la api de google para maps.
+
 ## 0.1.2 - 31-12-2017
 ### Añadido
 - Arreglada creación de usuarios 
