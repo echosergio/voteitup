@@ -26,7 +26,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="220sp"
-                android:layout_margin="20sp"
+                android:layout_marginHorizontal="20sp"
+                android:layout_marginVertical="12sp"
                 android:orientation="vertical"
                 android:weightSum="1">
 
@@ -34,7 +35,7 @@
                     android:id="@+id/pollText"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.84"
+                    android:layout_weight="0.76"
                     android:fontFamily="@font/arvo_bold"
                     android:gravity="center_vertical"
                     android:textColor="@color/white"
@@ -43,45 +44,25 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="0.16"
+                    android:layout_weight="0.24"
                     android:orientation="horizontal"
                     android:weightSum="1">
 
-                    <LinearLayout
+                    <android.support.design.widget.FloatingActionButton
+                        android:id="@+id/floatingActionVoteButton"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.30"
-                        android:orientation="horizontal"
-                        android:weightSum="1">
-
-                        <ImageButton
-                            android:id="@+id/voteButton"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.40"
-                            android:background="@null"
-                            android:scaleType="centerInside"
-                            app:srcCompat="@drawable/vote_icon" />
-
-                        <TextView
-                            android:id="@+id/voteText"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="0.60"
-                            android:layout_marginLeft="5sp"
-                            android:fontFamily="@font/roboto_light"
-                            android:gravity="start|center_vertical"
-                            android:text="@string/vote"
-                            android:textColor="@color/white"
-                            android:textSize="20sp"
-                            android:textStyle="bold" />
-                    </LinearLayout>
+                        android:layout_weight="0.20"
+                        android:clickable="true"
+                        app:backgroundTint="@color/ic_launcher_background"
+                        app:fabSize="normal"
+                        app:srcCompat="@mipmap/ic_launcher" />
 
                     <TextView
                         android:id="@+id/votesText"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="0.70"
+                        android:layout_weight="0.80"
                         android:fontFamily="@font/roboto_light"
                         android:gravity="end|center_vertical"
                         android:text="0 votos"

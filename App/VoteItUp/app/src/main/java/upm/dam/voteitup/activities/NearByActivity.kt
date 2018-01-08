@@ -108,7 +108,7 @@ class NearByActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         launch(UI) {
-            val getPollsAsync = async { ApiClient.getAllPolls() }
+            val getPollsAsync = async { ApiClient.getPolls() }
             val polls = getPollsAsync.await() ?: error("Error retrieving Poll info")
             mHashMap= HashMap()
             polls.filter{it.Area != null}.forEach {
