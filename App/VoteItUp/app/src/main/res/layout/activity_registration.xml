@@ -120,7 +120,8 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/montserrat"
                 android:text="@string/action_register"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:background="@drawable/rounded_btn"/>
 
         </LinearLayout>
     </ScrollView>

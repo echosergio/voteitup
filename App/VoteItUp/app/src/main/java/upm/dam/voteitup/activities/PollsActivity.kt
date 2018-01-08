@@ -20,11 +20,7 @@ import kotlinx.coroutines.experimental.launch
 import upm.dam.voteitup.ApiClient
 import upm.dam.voteitup.R
 import upm.dam.voteitup.entities.UserActivity
-import android.app.ActionBar
 import android.widget.*
-import android.widget.LinearLayout
-
-
 
 class PollsActivity : AppCompatActivity() {
 
