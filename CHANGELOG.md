@@ -1,28 +1,32 @@
 # Changelog
 Bitácora del proyecto
 
-## 0.1.3 - 2-1-2017
+## 0.1.5 - 8-1-2017
+### Añadido
+- Funcionalidad de voto y creación de botones para votar en la misma actividad que la encuesta
+
+## 0.1.4 - 4-1-2017
 ### Modificado
- - Localizacion Fixed.
- - Actividad de Crear encuesta: nuevos controles para ciudad y pais. Boton de autocompletado.
-### Issues
- - Problemas con emulador y maps.
+ - Localización arreglada
+ - Actividad de Crear encuesta: nuevos controles para ciudad y pais. Boton de autocompletado
+### Problemas
+ - Problemas con emulador y maps
  - Problemas con emulador y "last location"
 
 ## 0.1.3 - 2-1-2017
 ### Añadido
- - Añadir actividad de cerca de ti.
+ - Añadir actividad de cerca de ti
  - Localizacion con fuzzyLocaton (basada en last location)
-### Issues
- - Perdida de tiempo monumental con la api de google para maps.
+### Problemas
+ - API de Google para Maps compleja
 
 ## 0.1.2 - 31-12-2017
 ### Añadido
-- Arreglada creación de usuarios 
 - Creación de actividad de perfil con informacón básica de usuario
 - Lista con la actividad reciente del usuario en su perfil 
 - Obención del id del usuario actual mediante la información del token JWT almacenado
 ### Modificado
+- Arreglada creación de usuarios
 - Arreglado backend para permitir la creación de usuarios sin autenticación previa
 - Actualizada la documentación web de la API 
 - Cambios menores en la interfaz gráfica de creación de encuesta
