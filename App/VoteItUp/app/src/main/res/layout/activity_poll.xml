@@ -96,7 +96,16 @@
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/pollActivityLineChart"
                 android:layout_width="match_parent"
-                android:layout_height="150sp" />
+                android:layout_height="150sp" >
+
+            </com.github.mikephil.charting.charts.LineChart>
+
+            <LinearLayout
+                android:id="@+id/pollChoicesLinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_margin="20sp"/>
 
         </LinearLayout>
 

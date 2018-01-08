@@ -172,6 +172,23 @@ object ApiClient {
         }
     }
 
+    suspend fun votePool(pollId: Int, choiceId: Int): Any {
+
+        val (_, _, result) = Fuel
+                .post("$URL/api/v1/polls/$pollId/choices/$choiceId/vote")
+                .header("Authorization" to "bearer $TOKEN")
+                .responseJson()
+
+        return when (result) {
+            is Result.Failure -> {
+                false
+            }
+            is Result.Success -> {
+                true
+            }
+        }
+    }
+
     fun getCurrentUserId(): Int {
         return decodeToken(TOKEN!!)!!["id"].toString().toInt();
     }

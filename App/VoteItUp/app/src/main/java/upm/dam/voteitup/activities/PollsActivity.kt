@@ -11,14 +11,20 @@ import upm.dam.voteitup.charts.PollBarChart
 import upm.dam.voteitup.charts.PollActivityLineChart
 import upm.dam.voteitup.entities.PollActivity
 import android.content.Intent
+import android.view.View
 import upm.dam.voteitup.entities.Poll
-import android.widget.TextView
+import kotlinx.android.synthetic.main.activity_poll.*
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import upm.dam.voteitup.ApiClient
 import upm.dam.voteitup.R
 import upm.dam.voteitup.entities.UserActivity
+import android.app.ActionBar
+import android.widget.*
+import android.widget.LinearLayout
+
+
 
 class PollsActivity : AppCompatActivity() {
 
@@ -44,9 +50,7 @@ class PollsActivity : AppCompatActivity() {
             votesText.text = poll.Choices.toString()
             votesText.text = poll.Choices.orEmpty().sumBy { it.votes }.toString() + " votos"
 
-            val choices = poll.Choices
-
-            val pollBarChart = PollBarChart(choices!!)
+            val pollBarChart = PollBarChart(poll.Choices!!)
             var typeFace: Typeface? = ResourcesCompat.getFont(baseContext, R.font.roboto_light)
 
             pollBarChart.typeFace = typeFace
@@ -65,6 +69,36 @@ class PollsActivity : AppCompatActivity() {
             val lineChart2 = pollActivityLineChart.getChart(lineChart)
 
             lineChart2.invalidate()
+
+            floatingActionVoteButton.setOnClickListener{
+                horizontalBarChart.visibility = View.GONE
+                recentActivityText.visibility = View.GONE
+                lineChart.visibility = View.GONE
+                pollChoicesLinearLayout.visibility = View.VISIBLE
+
+                poll.Choices.forEach { choice ->
+                    val choiceButton = Button(baseContext)
+
+                    val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+                    layoutParams.setMargins(10, 15, 10, 15)
+                    choiceButton.setLayoutParams(layoutParams)
+                    choiceButton.setText(choice.text)
+                    choiceButton.setBackgroundResource(R.drawable.rounded_btn)
+
+                    choiceButton.setOnClickListener{
+                        val votePoolAsync = async { ApiClient.votePool(poll.id!!.toInt(), choice.id) }
+
+                        launch(UI) {
+                            if(votePoolAsync.await() == false)
+                                Toast.makeText(baseContext, "Ya has votado en esta encuesta!",Toast.LENGTH_LONG).show()
+                            finish();
+                            startActivity(getIntent())
+                        }
+                    }
+
+                    pollChoicesLinearLayout.addView(choiceButton);
+                }
+            }
         }
     }
 
