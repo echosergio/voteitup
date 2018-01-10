@@ -50,7 +50,6 @@
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="carles@mail.com"
                     android:textColor="@color/ic_launcher_background"
                     android:textSize="18sp" />
 
@@ -73,7 +72,6 @@
                     android:inputType="textPassword"
                     android:maxLines="1"
                     android:singleLine="true"
-                    android:text="1234"
                     android:textColor="@color/ic_launcher_background"
                     android:textSize="18sp" />
 

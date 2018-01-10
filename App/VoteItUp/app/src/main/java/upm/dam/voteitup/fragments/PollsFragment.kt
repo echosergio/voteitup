@@ -73,30 +73,28 @@ class PollsFragment : Fragment() {
             override fun onQueryTextChange(newText: String): Boolean = false
         })
 
-        simpleSearchView.setOnCloseListener(object : SearchView.OnCloseListener {
-            override fun onClose(): Boolean {
-                val getPollsAsync = async { ApiClient.getPolls() }
+        simpleSearchView.setOnCloseListener {
+            val getPollsAsync = async { ApiClient.getPolls() }
 
-                launch(UI) {
-                    val polls = getPollsAsync.await()!!.sortedByDescending { it.id!!.toInt() }
+            launch(UI) {
+                val polls = getPollsAsync.await()!!.sortedByDescending { it.id!!.toInt() }
 
-                    listView.adapter = PollsListAdapter(activity, polls)
+                listView.adapter = PollsListAdapter(activity, polls)
 
-                    mainPollLayout.visibility = View.VISIBLE
+                mainPollLayout.visibility = View.VISIBLE
 
-                    val mainPoll = polls.filter { it.creationDate!! > date }.maxBy { it.Choices!!.sumBy { it.votes } }
-                    mainPollTextView.text = mainPoll!!.text
-                    mainPollVotesTextView.text = mainPoll.Choices!!.sumBy { it.votes }.toString() + " votos"
+                val mainPoll = polls.filter { it.creationDate!! > date }.maxBy { it.Choices!!.sumBy { it.votes } }
+                mainPollTextView.text = mainPoll!!.text
+                mainPollVotesTextView.text = mainPoll.Choices!!.sumBy { it.votes }.toString() + " votos"
 
-                    mainPollLayout.setOnClickListener {
-                        val intent = PollsActivity.newIntent(activity, mainPoll)
-                        startActivity(intent)
-                    }
+                mainPollLayout.setOnClickListener {
+                    val intent = PollsActivity.newIntent(activity, mainPoll)
+                    startActivity(intent)
                 }
-
-                return false;
             }
-        });
+
+            false
+        }
 
         return view;
     }
