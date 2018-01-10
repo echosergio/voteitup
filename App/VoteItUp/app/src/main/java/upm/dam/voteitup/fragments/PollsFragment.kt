@@ -30,17 +30,19 @@ class PollsFragment : Fragment() {
             startActivity(intent)
         }
 
-        listView.adapter = PollsListAdapter(activity, listOf<Poll>())
-
         val getPollsAsync = async { ApiClient.getPolls() }
-        launch(UI) { listView.adapter = PollsListAdapter(activity, getPollsAsync.await()!!) }
+
+        launch(UI) {
+            val polls = getPollsAsync.await()!!.sortedByDescending { it.id!!.toInt() }
+            listView.adapter = PollsListAdapter(activity, polls)
+        }
 
         val simpleSearchView = view!!.findViewById<SearchView>(R.id.searchView)
 
         simpleSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(keyword: String): Boolean {
                 val getPollsAsync = async { ApiClient.getPolls(keyword) }
-                launch(UI) { listView.adapter = PollsListAdapter(activity, getPollsAsync.await()!!) }
+                launch(UI) { listView.adapter = PollsListAdapter(activity, getPollsAsync.await()!!.sortedByDescending { it.id!!.toInt() }) }
                 return false
             }
 
