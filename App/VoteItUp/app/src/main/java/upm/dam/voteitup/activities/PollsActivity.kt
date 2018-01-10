@@ -66,9 +66,9 @@ class PollsActivity : AppCompatActivity() {
             for (i in 1..6)
             {
                 calendar.add(Calendar.DATE, -1)
-                val date = SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime())
+                val date = SimpleDateFormat("dd-MM-yyyy").format(calendar.time)
 
-                if (!activities.any { it.date.equals(date) })
+                if (!activities.any { it.date == date })
                     activities.add(PollActivity(date = date))
             }
 
@@ -98,8 +98,8 @@ class PollsActivity : AppCompatActivity() {
                         launch(UI) {
                             if(votePoolAsync.await() == false)
                                 Toast.makeText(baseContext, "Ya has votado en esta encuesta!",Toast.LENGTH_LONG).show()
-                            finish();
-                            startActivity(getIntent())
+                            finish()
+                            startActivity(intent)
                         }
                     }
 
