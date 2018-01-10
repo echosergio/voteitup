@@ -21,6 +21,9 @@ import upm.dam.voteitup.ApiClient
 import upm.dam.voteitup.R
 import upm.dam.voteitup.entities.UserActivity
 import android.widget.*
+import java.util.*
+import java.text.SimpleDateFormat
+
 
 class PollsActivity : AppCompatActivity() {
 
@@ -35,6 +38,7 @@ class PollsActivity : AppCompatActivity() {
         val lineChart = findViewById<LineChart>(R.id.pollActivityLineChart)
 
         val getPollsAsync = async { ApiClient.getPoll(pollId.toInt()) }
+        val getPollActivityAsync = async { ApiClient.getPollActivity(pollId.toInt()) }
 
         launch(UI) {
             val poll = getPollsAsync.await() ?: error("Error retrieving Poll info")
@@ -52,16 +56,23 @@ class PollsActivity : AppCompatActivity() {
             pollBarChart.typeFace = typeFace
             pollBarChart.getChart(horizontalBarChart).invalidate()
 
-            val activities = mutableListOf(
-                    PollActivity(134534, "01-11-2017"),
-                    PollActivity(523325, "01-11-2017"),
-                    PollActivity(233225, "01-11-2017"),
-                    PollActivity(423434, "01-11-2017"),
-                    PollActivity(323424, "01-11-2017"),
-                    PollActivity(654645, "01-11-2017"),
-                    PollActivity(764564, "01-11-2017"))
+            val pollActivities = getPollActivityAsync.await() ?: error("Error retrieving Poll Activity info")
 
-            val pollActivityLineChart = PollActivityLineChart(activities)
+            val activities = mutableListOf<PollActivity>()
+            activities.addAll(pollActivities)
+
+            val calendar = Calendar.getInstance()
+
+            for (i in 1..6)
+            {
+                calendar.add(Calendar.DATE, -1)
+                val date = SimpleDateFormat("dd-MM-yyyy").format(calendar.getTime())
+
+                if (!activities.any { it.date.equals(date) })
+                    activities.add(PollActivity(date = date))
+            }
+
+            val pollActivityLineChart = PollActivityLineChart(activities.sortedBy { it.date })
             val lineChart2 = pollActivityLineChart.getChart(lineChart)
 
             lineChart2.invalidate()

@@ -4,15 +4,12 @@ import com.github.kittinunf.fuel.Fuel
 import com.github.kittinunf.fuel.android.extension.responseJson
 import com.github.kittinunf.result.Result
 import com.google.gson.Gson
-import upm.dam.voteitup.entities.Poll
-import upm.dam.voteitup.entities.Poll_POST
-import upm.dam.voteitup.entities.User
 import io.jsonwebtoken.Jwts
 import io.jsonwebtoken.SignatureException
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.JwsHeader
 import io.jsonwebtoken.SigningKeyResolverAdapter
-import upm.dam.voteitup.entities.UserActivity
+import upm.dam.voteitup.entities.*
 
 object ApiClient {
 
@@ -168,6 +165,25 @@ object ApiClient {
             }
             is Result.Success -> {
                 (0 until result.value.array().length()).mapTo(userActivities) { Gson().fromJson(result.value.array()[it].toString(), UserActivity::class.java) }
+            }
+        }
+    }
+
+    suspend fun getPollActivity(id: Int): List<PollActivity>? {
+
+        val pollActivities = mutableListOf<PollActivity>()
+
+        val (_, _, result) = Fuel
+                .get("$URL/api/v1/polls/$id/activity")
+                .header("Authorization" to "bearer $TOKEN")
+                .responseJson()
+
+        return when (result) {
+            is Result.Failure -> {
+                null
+            }
+            is Result.Success -> {
+                (0 until result.value.array().length()).mapTo(pollActivities) { Gson().fromJson(result.value.array()[it].toString(), PollActivity::class.java) }
             }
         }
     }
