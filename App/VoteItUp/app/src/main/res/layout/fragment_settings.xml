@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/settingsLayout"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="30sp">
+
+        <Switch
+            android:id="@+id/switch1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            android:layout_marginTop="10sp"
+            android:checked="true"
+            android:text="Notificaciones"
+            android:textSize="18sp" />
+
+        <Switch
+            android:id="@+id/switch2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            android:layout_marginTop="10sp"
+            android:checked="true"
+            android:text="Mostrar encuestas recientes primero"
+            android:textSize="18sp" />
+
+        <Switch
+            android:id="@+id/switch4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            android:layout_marginTop="10sp"
+            android:text="Efectos sonoros"
+            android:textSize="18sp" />
+
+        <Switch
+            android:id="@+id/switch3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10sp"
+            android:layout_marginTop="10sp"
+            android:text="Modo nocturno"
+            android:textSize="18sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20sp"
+            android:text="Perfil"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/checkBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:checked="true"
+            android:text="Mostrar biografía" />
+
+        <CheckBox
+            android:id="@+id/checkBox2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:checked="false"
+            android:text="Mostrar foto de perfil" />
+
+        <CheckBox
+            android:id="@+id/checkBox3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10sp"
+            android:checked="true"
+            android:text="Mostrar actividad reciente" />
+
+        <Button
+            android:id="@+id/signOutButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24sp"
+            android:layout_marginBottom="20sp"
+            android:text="Salir y desvincular cuenta"
+            android:background="@drawable/rounded_btn"/>
+
+</LinearLayout>

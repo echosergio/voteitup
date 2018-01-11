@@ -32,11 +32,6 @@ class LoginActivity : AppCompatActivity() {
 
         ApiClient.URL = resources.getString(R.string.api_url)
 
-        // DEV: To reset user token
-        // val editor = sharedPreferences!!.edit()
-        // editor.remove(TOKEN)
-        // editor.apply()
-
         val token = sharedPreferences!!.getString(TOKEN, null)
 
         if (token != null) {
