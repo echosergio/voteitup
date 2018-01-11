@@ -23,10 +23,10 @@ tools:context="upm.dam.voteitup.fragments.ProfileFragment">
 
                 <ImageView
                     android:id="@+id/mainPollImageView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="@android:dimen/thumbnail_height"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/profile_background" />
+                    android:src="@android:color/holo_red_light" />
 
                 <TextView
                     android:id="@+id/mainPollTextView"

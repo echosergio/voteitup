@@ -11,6 +11,7 @@ import upm.dam.voteitup.charts.PollBarChart
 import upm.dam.voteitup.charts.PollActivityLineChart
 import upm.dam.voteitup.entities.PollActivity
 import android.content.Intent
+import android.graphics.Color
 import android.view.View
 import upm.dam.voteitup.entities.Poll
 import kotlinx.android.synthetic.main.activity_poll.*
@@ -88,9 +89,10 @@ class PollsActivity : AppCompatActivity() {
 
                     val layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT)
                     layoutParams.setMargins(10, 15, 10, 15)
-                    choiceButton.setLayoutParams(layoutParams)
-                    choiceButton.setText(choice.text)
+                    choiceButton.layoutParams = layoutParams
                     choiceButton.setBackgroundResource(R.drawable.rounded_btn)
+                    choiceButton.text = choice.text
+                    choiceButton.setTextColor(Color.BLACK)
 
                     choiceButton.setOnClickListener{
                         val votePoolAsync = async { ApiClient.votePool(poll.id!!.toInt(), choice.id) }
