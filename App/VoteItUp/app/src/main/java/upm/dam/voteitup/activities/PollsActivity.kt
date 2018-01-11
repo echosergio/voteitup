@@ -64,7 +64,9 @@ class PollsActivity : AppCompatActivity() {
 
             val calendar = Calendar.getInstance()
 
-            for (i in 1..6)
+            calendar.add(Calendar.DATE, 1)
+
+            for (i in 1..7)
             {
                 calendar.add(Calendar.DATE, -1)
                 val date = SimpleDateFormat("dd-MM-yyyy").format(calendar.time)

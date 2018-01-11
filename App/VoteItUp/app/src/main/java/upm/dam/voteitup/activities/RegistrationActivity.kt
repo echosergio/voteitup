@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.view.View
 import android.widget.ProgressBar
+import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_create_poll.*
 import kotlinx.android.synthetic.main.activity_registration.*
 import kotlinx.coroutines.experimental.android.UI
@@ -50,6 +51,8 @@ class RegistrationActivity : AppCompatActivity() {
             mProgressBar.visibility = View.GONE
             if (result == true) {
                 goToLogin()
+            } else {
+                Toast.makeText(baseContext, "Ya existe un usuario registrado con este email", Toast.LENGTH_LONG).show()
             }
         }
     }
@@ -74,18 +77,19 @@ class RegistrationActivity : AppCompatActivity() {
 
 
         if (TextUtils.isEmpty(user_name.text)) {
-            txtBox_desc.error = getString(R.string.error_field_required)
+            user_name.error = getString(R.string.error_field_required)
             focusView = user_name
             cancel = true
         }
+
         if (TextUtils.isEmpty(password.text) || !Validators().isPasswordValid(password.text.toString())) {
-            txtBox_desc.error = getString(R.string.error_field_required)
+            password.error = getString(R.string.error_field_required)
             focusView = password
             cancel = true
         }
 
         if (TextUtils.isEmpty(email.text)) {
-            txtBox_desc.error = getString(R.string.error_field_required)
+            email.error = getString(R.string.error_field_required)
             focusView = email
             cancel = true
         } else if (!Validators().isEmailValid(email.text.toString())) {
