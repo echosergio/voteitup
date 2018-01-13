@@ -1,6 +1,12 @@
 # Changelog
 Bitácora del proyecto
 
+## 0.2.0 - 12-1-2017
+### Añadido
+- Actividad de ajustes y desvincular cuenta
+### Modificado
+- Corregidos bugs
+
 ## 0.1.5 - 8-1-2017
 ### Añadido
 - Funcionalidad de voto y creación de botones para votar en la misma actividad que la encuesta
