@@ -9,9 +9,9 @@
 Dedicado exclusivamente a votaciones siendo una plataforma de referencia a la hora de realizar encuestas.</p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/sergiovhe/voteitup/master/Img/screenshot-1.png" alt="Screenshot1" width="700">
-  <img src="https://raw.githubusercontent.com/sergiovhe/voteitup/master/Img/screenshot-2.png" alt="Screenshot2" width="700">
-  <img src="https://raw.githubusercontent.com/sergiovhe/voteitup/master/Img/screenshot-3.png" alt="Screenshot3" width="700">
+  <img src="https://raw.githubusercontent.com/sergiovhe/voteitup/master/Img/screenshot-1.png" alt="Screenshot1" width="800">
+  <img src="https://raw.githubusercontent.com/sergiovhe/voteitup/master/Img/screenshot-2.png" alt="Screenshot2" width="800">
+  <img src="https://raw.githubusercontent.com/sergiovhe/voteitup/master/Img/screenshot-3.png" alt="Screenshot3" width="800">
   <br><br><br>
 </p>
 
