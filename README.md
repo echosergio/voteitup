@@ -12,10 +12,7 @@ Dedicado exclusivamente a votaciones siendo una plataforma de referencia a la ho
   <img src="https://raw.githubusercontent.com/sergiovhe/voteitup/master/Img/Screenshot1.png" alt="Screenshot1" width="700">
   <img src="https://raw.githubusercontent.com/sergiovhe/voteitup/master/Img/Screenshot2.png" alt="Screenshot2" width="700">
   <img src="https://raw.githubusercontent.com/sergiovhe/voteitup/master/Img/Screenshot3.png" alt="Screenshot3" width="700">
-  <img src="https://raw.githubusercontent.com/sergiovhe/voteitup/master/Img/Screenshot4.png" alt="Screenshot4" width="700">
-  <img src="https://raw.githubusercontent.com/sergiovhe/voteitup/master/Img/Screenshot5.png" alt="Screenshot5" width="700">
-  <img src="https://raw.githubusercontent.com/sergiovhe/voteitup/master/Img/Screenshot6.png" alt="Screenshot6" width="700">
-  <br>
+  <br><br><br>
 </p>
 
 <p align="center">API documentation:<br><em><a href="https://sergiovhe.github.io/voteitup-api/">sergiovhe.github.io/voteitup-api</a></em></p>
